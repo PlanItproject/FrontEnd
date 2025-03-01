@@ -5,7 +5,7 @@ export const userMenuItems = [
     { label: "차단하기", onClick: () => console.log("차단하기 클릭됨") },
 ];
   
-export const moreMenuItems = [
-    { label: "편집하기", onClick: () => console.log("편집하기 클릭됨") },
-    { label: "삭제하기", onClick: () => console.log("삭제하기 클릭됨") },
+export const moreMenuItems = (handlers) => [
+    { label: "편집하기", onClick: handlers.onEdit },
+    { label: "삭제하기", onClick: handlers.onDelete },
 ];

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useCommentForm = ({ initialValue, onSubmit }) => {
+const useCommentForm = ({ initialValue, onSubmit, onHeightChange }) => {
     const [comment, setComment] = useState(initialValue);
     const textareaRef = useRef(null); // textarea 요소 참조
     const isMobile = window.matchMedia("(max-width: 768px)").matches; // 모바일 감지지
@@ -10,31 +10,39 @@ const useCommentForm = ({ initialValue, onSubmit }) => {
         setComment(initialValue);
     }, [initialValue]);
 
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaAutosize({ target: textareaRef.current });
+        }
+    }, [comment]);
+
     // textarea 높이 자동 조정
     const textareaAutosize = (e) => {
         const element = e.target;
+        
         const maxRows = 10; // 최대 줄 수 제한
-        const lineHeight = 23.2; // CSS에서 설정한 line-height와 동일해야 함
-
-        // 패딩 및 테두리 영향 방지 (scrollHeight의 증가 원인 중 하나)
-        const computedStyle = window.getComputedStyle(element);
-        const paddingTop = parseInt(computedStyle.paddingTop, 10);
-        const paddingBottom = parseInt(computedStyle.paddingBottom, 10);
-        const borderTop = parseInt(computedStyle.borderTopWidth, 10);
-        const borderBottom = parseInt(computedStyle.borderBottomWidth, 10);
-        const verticalPadding = paddingTop + paddingBottom + borderTop + borderBottom;
-
+        const lineHeight = parseFloat(getComputedStyle(element).lineHeight); //css 자동 가져오기
+        
         element.style.height = "auto"; // 높이 초기화
-
+        
         requestAnimationFrame(() => {
-            const newHeight = Math.min(element.scrollHeight - verticalPadding, maxRows * lineHeight); // 패딩 고려하여 높이 설정
-
-            if (element.style.height !== `${newHeight}px`) {
-                element.style.height = `${newHeight}px`;
-            }
+            const newHeight = Math.min(element.scrollHeight, maxRows * lineHeight);
+            element.style.height = `${newHeight}px`;
+            
+            const currentRows = Math.floor(element.scrollHeight / lineHeight); // 현재 줄 수 계산
+            element.style.overflowY = currentRows > maxRows ? 'auto' : 'hidden'; //10줄 초과 시 스크롤 표시
+            
+            if (typeof onHeightChange === 'function') { // onHeightChange가 있으면 높이 전달
+                onHeightChange(element.offsetHeight + 60);
+            };
         });
 
-        setComment(element.value);
+
+    };
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setComment(value);  // 텍스트 값 업데이트
     };
 
     // PC에서 Enter → 등록, Shift+Enter → 개행
@@ -67,7 +75,7 @@ const useCommentForm = ({ initialValue, onSubmit }) => {
         textareaRef,
         handleKeyDown,
         handleSubmit,
-        textareaAutosize,
+        handleChange,
     };
 };
 

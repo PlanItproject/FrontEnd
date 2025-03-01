@@ -1,25 +1,26 @@
 import { useEffect } from 'react';
-import useCommentForm from './useCommentForm';
+import useCommentForm from './hooks/useCommentForm';
 import sendIcon from '../../../../../assets/icon/send.svg'
 import { Form, CommentBox, SendButton } from './styles/commentForm.style';
 
-const CommentForm = ({ onSubmit, mentionUser }) => {
-    const { comment, setComment, textareaRef, textareaAutosize, handleKeyDown, handleSubmit } = useCommentForm({
+const CommentForm = ({ onSubmit, mentionUser, onHeightChange }) => {
+    const { comment, setComment, textareaRef, handleChange, handleKeyDown, handleSubmit } = useCommentForm({
         onSubmit,
+        onHeightChange,
     });
 
     useEffect(() => {
         if (mentionUser) {
             setComment(`@${mentionUser} `);
         }
-    }, [mentionUser]);
+    }, [mentionUser, setComment]);
 
     return(
         <Form onSubmit={handleSubmit}>
             <CommentBox 
                 ref={textareaRef}
                 value={comment}
-                onChange={textareaAutosize}
+                onChange={handleChange}
                 onKeyDown={handleKeyDown} // Enter 키 처리
                 placeholder='댓글 입력하기'
                 rows={1}

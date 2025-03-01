@@ -8,7 +8,16 @@ import likeIcon from '../../../../../assets/icon/like.svg';
 import likedIcon from '../../../../../assets/icon/liked.svg';
 
 
-const CommentItem = ({ user, content, isPostAuthor, initialLikeCount, createdAt, replies =[], mentionUser= null, onReply }) => {
+const CommentItem = ({ 
+    user, 
+    content, 
+    isPostAuthor, 
+    initialLikeCount, 
+    createdAt, 
+    replies =[], 
+    mentionUser= null, 
+    handlers 
+}) => {
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showMoreMenu, setShowMoreMenu] = useState(false);
     const [liked, setLiked] = useState(false);
@@ -21,6 +30,8 @@ const CommentItem = ({ user, content, isPostAuthor, initialLikeCount, createdAt,
         setLikeCount((prev) => (liked ? prev - 1 : prev + 1)); // UI 단계
     };
 
+    const { onReply, onEdit, onDelete } = handlers;
+
     return  (
         <CommentItemContainer>
             <CommentHeader>
@@ -31,14 +42,24 @@ const CommentItem = ({ user, content, isPostAuthor, initialLikeCount, createdAt,
                     </UserName>
                     {isPostAuthor && <AuthorBadge>작성자</AuthorBadge>}
                     {showUserMenu && (
-                        <PopupMenu isVisible={showUserMenu} user={user} items={userMenuItems} onClose={() => setShowUserMenu(false)} />
+                        <PopupMenu 
+                            isVisible={showUserMenu} 
+                            user={user} 
+                            items={userMenuItems} 
+                            onClose={() => setShowUserMenu(false)} 
+                        />
                     )}
                     <MoreOptions onClick={() => {setShowMoreMenu((prev) => !prev)
                     }}>
                         <img src={moreIcon} alt="더보기"/>
                     </MoreOptions>
                     {showMoreMenu && (
-                        <PopupMenu isVisible={showMoreMenu} items={moreMenuItems} onClose={() => setShowMoreMenu(false)} />
+                        <PopupMenu 
+                            isVisible={showMoreMenu} 
+                            items={moreMenuItems} 
+                            onClose={() => setShowMoreMenu(false)} 
+                            actionHandlers={{ onEdit, onDelete }}
+                        />
                     )}
                 </UserSection>
                 <LikeSection>
@@ -77,7 +98,7 @@ const CommentItem = ({ user, content, isPostAuthor, initialLikeCount, createdAt,
                             createdAt={reply.createdAt}
                             mentionUser={reply.mentionUser}
                             replies={[]} // 대댓글의 대댓글 방지
-                            onReply={onReply}
+                            handlers={handlers}
                         /> // 재귀
                     ))}
                 </ReplyContainer>

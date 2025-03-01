@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Blur, Line, MenuContainer, MenuHeader, MenuItem, UserProfile } from "./PopupMenu.style"
 import ProfileImage from "../Profile/ProfileImage";
 
-const PopupMenu = ({ user, items, onClose, isVisible }) => {
+const PopupMenu = ({ user, items, onClose, isVisible, actionHandlers }) => {
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -25,6 +25,10 @@ const PopupMenu = ({ user, items, onClose, isVisible }) => {
         };
     }, [isVisible, onClose]);
 
+    const processedItems = typeof items === 'function'
+    ? items(actionHandlers) // 함수를 실행한 결과 할당
+    : items; // 아니면 items 자체를 할당
+
     if (!isVisible) return null;
 
     return (
@@ -39,8 +43,8 @@ const PopupMenu = ({ user, items, onClose, isVisible }) => {
                     </UserProfile>
                 )}
 
-                {items.map((item, index) => (
-                    <MenuItem key={index} onClick={() => item.onClick()}>
+                {processedItems.map((item, index) => (
+                    <MenuItem key={index} onClick={item.onClick}>
                         {item.label}
                     </MenuItem>
                 ))}
