@@ -1,21 +1,18 @@
 import CommentItem from './CommentItem';
-import { CommentListContainer, EmptyCommentBox } from './styles/commentList.style';
+import { CommentListContainer, CommentListHeader, EmptyCommentBox } from './styles/commentList.style';
 
-const CommentList = ({ comments, handlers }) => (
+// ⚠️ Context API 활용하여 props drilling 해결
+// undefined 방지
+const CommentList = ({ comments = [], handlers = {} }) => (
     <CommentListContainer>
+        <CommentListHeader>코멘트</CommentListHeader>
         {comments.length === 0 ? (
             <EmptyCommentBox>아직 댓글이 없어요!<br/>첫 번째 댓글을 작성해보세요.</EmptyCommentBox>
         ) : (
             comments.map((comment) => (
                 <CommentItem
                     key={comment.id}
-                    {...comment}
-                    user={comment.user}
-                    content={comment.content}
-                    isPostAuthor={comment.isPostAuthor}
-                    initialLikeCount={comment.likeCount}
-                    createdAt={comment.createdAt}
-                    replies={comment.replies}
+                    commentData={comment}
                     handlers = {handlers}
                 />
             ))

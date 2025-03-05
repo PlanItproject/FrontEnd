@@ -45,7 +45,7 @@ export const MenuContainer = styled.div`
     line-height: 1.45;
     border-radius: 40px 40px 0 0;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05 );
-    animation: ${(props) => (props.isVisible ? slideUp : slideDown)} 0.3s ease-out;
+    animation: ${({ isVisible }) => (isVisible ? slideUp : slideDown)} 0.3s ease-out;
     pointer-events: ${(props) => (props.isVisible ? 'auto' : 'none')};
 `;
 

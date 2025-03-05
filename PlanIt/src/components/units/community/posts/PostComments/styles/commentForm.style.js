@@ -8,7 +8,6 @@ export const Form = styled.form`
     bottom: 0;
     background-color: var(--background-default-default-tap);
     border-radius: 34px 34px 0 0;
-    box-sizing: border-box;
 `;
 
 export const CommentBox = styled.textarea`

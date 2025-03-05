@@ -2,8 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 
 const useCommentForm = ({ initialValue, onSubmit, onHeightChange }) => {
     const [comment, setComment] = useState(initialValue);
-    const textareaRef = useRef(null); // textarea 요소 참조
-    const isMobile = window.matchMedia("(max-width: 768px)").matches; // 모바일 감지지
+    const [isMobile, setIsMobile] = useState(false);
+    const textareaRef = useRef(null);
+    const prevHeight = useRef(107);
+
+    // 모바일 감지  (useEffect 안에서 처리!)
+    useEffect(() => {
+        const checkMobile = window.matchMedia("(max-width: 768px)").matches;
+        setIsMobile(checkMobile);
+    }, []) // 최초 한번만 실행
     
     // `initialValue`가 변경될 때마다 `comment`를 업데이트 (수정 기능 지원)
     useEffect(() => {
@@ -22,7 +29,7 @@ const useCommentForm = ({ initialValue, onSubmit, onHeightChange }) => {
         
         const maxRows = 10; // 최대 줄 수 제한
         const lineHeight = parseFloat(getComputedStyle(element).lineHeight); //css 자동 가져오기
-        
+
         element.style.height = "auto"; // 높이 초기화
         
         requestAnimationFrame(() => {
@@ -32,12 +39,16 @@ const useCommentForm = ({ initialValue, onSubmit, onHeightChange }) => {
             const currentRows = Math.floor(element.scrollHeight / lineHeight); // 현재 줄 수 계산
             element.style.overflowY = currentRows > maxRows ? 'auto' : 'hidden'; //10줄 초과 시 스크롤 표시
             
-            if (typeof onHeightChange === 'function') { // onHeightChange가 있으면 높이 전달
-                onHeightChange(element.offsetHeight + 60);
+            // 기존 높이와 다를 때만 호출
+            const calculatedHeight = element.offsetHeight + 60;
+            const isHeightChanged = prevHeight.current !== calculatedHeight;
+            const isValidOnHeightChange = typeof onHeightChange === 'function'; // onHeightChange가 있으면 높이 전달
+
+            if (isHeightChanged && isValidOnHeightChange) {
+                onHeightChange(calculatedHeight);
+                prevHeight.current = calculatedHeight; // prevHeight 업데이트
             };
         });
-
-
     };
 
     const handleChange = (e) => {
@@ -63,7 +74,6 @@ const useCommentForm = ({ initialValue, onSubmit, onHeightChange }) => {
     
         setTimeout(() => {
             if (textareaRef.current) { // 비어있는 경우 
-                textareaRef.current.value = ''; // 값 초기화
                 textareaRef.current.style.height = 'auto'; //높이 초기화 
             }
         }, 0)

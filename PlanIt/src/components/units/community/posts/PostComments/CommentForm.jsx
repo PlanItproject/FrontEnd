@@ -11,7 +11,8 @@ const CommentForm = ({ onSubmit, mentionUser, onHeightChange }) => {
 
     useEffect(() => {
         if (mentionUser) {
-            setComment(`@${mentionUser} `);
+            // 기존 댓글 유지하면서 새로운 맨션 추가
+            setComment((prevComment) => `@${mentionUser} ${prevComment}`);
         }
     }, [mentionUser, setComment]);
 

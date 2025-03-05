@@ -9,6 +9,7 @@
 
     /* background */
     --background-default-default-tap: #F5F5F5;
+    --background-default-secondary: #F5F5F5;
 
     /* 폰트 */
     --font-family-body: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';

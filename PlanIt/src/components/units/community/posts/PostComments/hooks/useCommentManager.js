@@ -1,16 +1,16 @@
 import { useCallback, useMemo, useState } from 'react';
 
 const useCommentManager = (initialComments) => {
-    const [comments, setComments] = useState(initialComments || []);
+    const [comments, setComments] = useState(() => initialComments || []); // 초기 렌더링 시에만 계산!
     const [formHeight, setFormHeight] = useState(107);
     const [mentionUser, setMentionUser] = useState(null);
+
+    // ⚠️ 로직 작성하기
     
     // 폼 높이 변경 핸들러
     const handleFormHeightChange = useCallback((height) => {
         setFormHeight(height);
     }, []);
-    
-    // 댓글 목록 가져오기 (무한 스크롤)
     
     // 댓글 추가
     const addComment = useCallback((newComment) => {

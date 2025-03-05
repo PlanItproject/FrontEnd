@@ -1,21 +1,25 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import useCommentManager from './hooks/useCommentManager'
-import { dummyComments } from './dummy/dummyComments';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import { CommentContainer } from './styles/commentManager.style';
 
-const CommentManager = () => {
-    const { comments, formHeight, mentionUser, handlers } = useCommentManager(dummyComments)
+const CommentManager = ({ initialComments }) => {
+    const { comments, formHeight, mentionUser, handlers } = useCommentManager(initialComments);
 
     const commentListRef = useRef(null);
+    const prevCommentListRef = useRef(comments.length);
 
     useEffect(() => {
-        // if (commentListRef.current) {
-        //     commentListRef.current.scrollTop = commentListRef.current.scrollHeight;
-        // }
-        window.scrollTo(0, document.body.scrollHeight); 
-    }, [formHeight, comments]);
+        // 댓글 추가/삭제 될 때만 하단으로
+        if(prevCommentListRef.current !== comments.length) {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            })
+        };
+        prevCommentListRef.current = comments.length;
+    }, [comments]); 
 
     return (
         <CommentContainer ref={commentListRef} marginBottom={`${formHeight}px`}>

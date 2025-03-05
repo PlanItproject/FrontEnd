@@ -2,9 +2,11 @@ import profileImage from '../../../../../../assets/profile.png';
 
 export const dummyComments = [
     {
-      id: 1,
+      id: '1',
+      postId: 'post-1',
       user: {
-        id: 101,
+        id: '101',
+        postId: 'post-1',
         name: 'John Doe',
         profileImage: profileImage,
       },
@@ -14,8 +16,9 @@ export const dummyComments = [
       createdAt: '25.11.11',
       replies: [
         {
-          id: 1011,
-          user: {id: 201, name: 'Alice', profileImage: profileImage},
+          id: '1011',
+          postId: 'post-1',
+          user: {id: '201', name: 'Alice', profileImage: profileImage},
           content: "대댓글 테스트 입니다.",
           mentionUser: null,
           isPostAuthor: false,
@@ -23,8 +26,9 @@ export const dummyComments = [
           createdAt: '25.11.11'
         },
         {
-          id: 1012,
-          user: { id: 101, name: 'John Doe', profileImage: profileImage},
+          id: '1012',
+          postId: 'post-1',
+          user: { id: '101', name: 'John Doe', profileImage: profileImage},
           mentionUser: "Alice", // 🔥 작성자가 남긴 대댓글
           content: "멘션 테스트 입니다.",
           isPostAuthor: true,
@@ -32,7 +36,8 @@ export const dummyComments = [
           createdAt: '25.11.11',
         },
         {
-          id: 1013,
+          id: '1013',
+          postId: 'post-1',
           user: {id: 201, name: 'Alice', profileImage: profileImage},
           content: '작품만 문화다, 팝니다 나아 너무 하여. 투표일의 반대는 지니는 있어 것 할까 된 국어의 못하는 이것을 깨진다. 확산을 애의 지적이 내용 소설 한과 힘쓰는 쌓아 하다.',
           mentionUser: 'Jhon Doe',
@@ -44,16 +49,17 @@ export const dummyComments = [
     },
     
     {
-      id: 2,
+      id: '2',
+      postId: 'post-1',
       user: {
-        id: 102,
+        id: '102',
         name: 'Jane Smith',
         profileImage: profileImage,
       },
-      content: '작품만 문화다, 팝니다 나아 너무 하여. 투표일의 반대는 지니는 있어 것 할까 된 국어의 못하는 이것을 깨진다. 확산을 애의 지적이 내용 소설 한과 힘쓰는 쌓아 하다. 작품만 문화다, 팝니다 나아 너무 하여. 투표일의 반대는 지니는 있어 것 할까 된 국어의 못하는 이것을 깨진다. 확산을 애의 지적이 내용 소설 한과 힘쓰는 쌓아 하다.',
+      content: '작품만 문화다, 팝니다 나아 너무 하여. 투표일의 반대는 지니는 있어 것 할까 된 국어의 못하는 이것을 깨진다. 확산을 애의 지적이 내용 소설 한과 힘쓰는 쌓아 하다.',
       isPostAuthor: false,
       likeCount: 2,
-      createdAt: '25.11.11',
+      createdAt: '2024-02-11',
       replies:[],
     },
 ];
