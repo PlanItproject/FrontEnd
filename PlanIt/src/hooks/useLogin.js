@@ -54,7 +54,6 @@ const useLogin = () => {
 
         try{
             const response = await authApi.login({ email, password });
-            // const response = await authApiMock.login({ email, password });
 
             localStorage.setItem("token", response.data.Token);
             localStorage.setItem("TokenExpiry", Date.now() + 24 * 60 * 60 * 1000); // 만료 시간

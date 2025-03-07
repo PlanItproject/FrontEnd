@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import useCommentManager from './hooks/useCommentManager'
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
@@ -13,9 +13,11 @@ const CommentManager = ({ initialComments }) => {
     useEffect(() => {
         // 댓글 추가/삭제 될 때만 하단으로
         if(prevCommentListRef.current !== comments.length) {
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
+            // window.scrollTo({
+            window.scrollIntoView({
+                // top: document.body.scrollHeight,
+                behavior: 'smooth',
+                block: 'end'
             })
         };
         prevCommentListRef.current = comments.length;

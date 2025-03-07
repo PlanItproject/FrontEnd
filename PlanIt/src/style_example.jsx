@@ -17,21 +17,21 @@ export default styleExample
 
 // 2. ThemeProvider 써서 적용시켜보기
 
-import { ThemeProvider } from "@emotion/react"
-import styled from "@emotion/styled"
-import theme from './theme.js'
-import './global.css'
+// import { ThemeProvider } from "@emotion/react"
+// import styled from "@emotion/styled"
+// import theme from './theme.js'
+// import './global.css'
 
-const Container = styled.div`
-    color: ${({ theme }) => theme.colors.text};
-`
+// const Container = styled.div`
+//     color: ${({ theme }) => theme.colors.text};
+// `
 
-const styleExample = () => {
-    return (
-        <ThemeProvider theme={theme}>
-            <Container>적용시켜보기</Container>
-        </ThemeProvider>
-    )
-}
+// const styleExample = () => {
+//     return (
+//         <ThemeProvider theme={theme}>
+//             <Container>적용시켜보기</Container>
+//         </ThemeProvider>
+//     )
+// }
 
-export default styleExample
+// export default styleExample
