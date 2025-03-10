@@ -31,10 +31,5 @@ body {
 }
 
 button {
-  all: unset;
   cursor: pointer;
-}
-
-textarea {
-  all: unset;
 }
