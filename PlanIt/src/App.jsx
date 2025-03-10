@@ -1,36 +1,45 @@
-import Register from './pages/regitser.jsx'
-import Login from './pages/login.jsx';
-import AccountRecovery from './pages/accountRecovery.jsx';
-import PasswordRecovery from './pages/PasswordRecovery.jsx';
-import PostRoutes from './routes/post.jsx';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WelcomeScreen from "./components/register/WelcomeScreen.jsx";
+import Register from "./pages/register/Regitser.jsx";
+import Login from "./pages/auth/Login.jsx";
+import AccountRecovery from "./pages/auth/accountRecovery.jsx";
+import PasswordRecovery from "./pages/auth/PasswordRecovery.jsx";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import WelcomeScreen from "./pages/register/WelcomeScreen.jsx";
 import "./styles/App.css";
-import './global.css';
-import "./styles/variables.css";
-import SplashPage from "./pages/SplashPage.jsx";
-import Inquiry from "./components/splash/inquiry/Inquiry.jsx"
-import Findpwd from "./components/splash/findpwd/Findpwd.jsx";
-import Style_example from "./style_example.jsx";
-
+import SplashPage from "./pages/splash/SplashPage.jsx";
+import Inquiry from "./pages/splash/inquiry/Inquiry.jsx";
+import Findpwd from "./pages/splash/findpwd/Findpwd.jsx";
+import Community from "./pages/community/Community.jsx";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { store } from "./pages/community/storage/commuStore/store.js";
 function App() {
-
   return (
-    <Router>
+    <Provider store={store}>
+      <Router>
         <Routes>
-            <Route path="/" element={<SplashPage/>}/>
-            <Route path='/login' element={<Login />} />
-            <Route path='/findAccount' element={<AccountRecovery />} />
-            <Route path='/findPW' element={<PasswordRecovery />} />
-            <Route path='/inquiry' element={<Inquiry/>} />
-            <Route path='/password' element={<Findpwd/>} />
-            <Route path="/welcome" element={<WelcomeScreen/>} />
-            <Route path="/" element={<Register/>} />
-            <Route path='/post/*' element={<PostRoutes />}/>
-            {/* <Route path="/" element={<Style_example/>}/> */}
+          {/* <Route path="/" element={<Navigate to="/community/post" />} />
+          <Route path="/community/*" element={<Community />} /> */}
+
+          <Route path="/" element={<Navigate to="/register/registerBody" />} />
+          <Route path="/register/*" element={<Register />} />
+
+          {/* <Route path="/" element={<SplashPage/>}/> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/findAccount" element={<AccountRecovery />} />
+          <Route path="/findPW" element={<PasswordRecovery />} />
+          <Route path="/inquiry" element={<Inquiry />} />
+          <Route path="/password" element={<Findpwd />} />
+          <Route path="/welcome" element={<WelcomeScreen />} />
+          {/* <Route path="/" element={<Register />} /> */}
         </Routes>
-    </Router>
-  )
+      </Router>
+    </Provider>
+  );
 }
 
 export default App;
