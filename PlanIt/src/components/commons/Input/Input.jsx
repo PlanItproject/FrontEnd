@@ -11,7 +11,8 @@ const Input = ({
     placeholder = "", 
     error, 
     hasError, 
-    required=false
+    required=false,
+    ...props
 }) => {
     return (
         <Container>
@@ -26,8 +27,9 @@ const Input = ({
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                hasError={hasError}
+                $hasError={hasError}
                 required={required}
+                {...props}
             />
             {error && <ErrorMessage>{error}</ErrorMessage>}
         </Container>

@@ -34,8 +34,8 @@ export const StyledButton = styled.button`
     }
 }}
     
-    ${props => {
-        switch(props.variant) {
+    ${({ $variant }) => {
+        switch($variant) {
             case 'secondary':
             return `
             background-color: white;
@@ -61,18 +61,11 @@ export const StyledButton = styled.button`
         `;
     }
 }}
-    
-    ${props => props.fullWidth && `
-        width: 100%;
-    `}
 
-    ${props => props.ninetyWidth && `
-        width: 90%;
-    `}
-    
-    ${props => props.middleWidth && `
-        width: 80%;
-    `}
+    ${({ $fullWidth }) => $fullWidth && `width: 100%;`}
+    ${({ $ninetyWidth }) => $ninetyWidth && `width: 90%;`}
+    ${({ $middleWidth }) => $middleWidth && `width: 80%;`}
+
     
     &:disabled {
         cursor: not-allowed;

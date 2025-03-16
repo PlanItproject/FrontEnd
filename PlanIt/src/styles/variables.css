@@ -1,4 +1,4 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
 :root {
     --primary-color: #2988FF;
@@ -12,13 +12,17 @@
     --background-default-secondary: #F5F5F5;
 
     /* 폰트 */
-    --font-family-body: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-family-body: 
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", 
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     --body-caption-12px: 12px;
     --body-secondary-16px: 16px;
     --text-default: #1E1E1E;
     --text-default-secondary: #808080;
+    --text-neatral-default: #292929;
 }
 
 .error {
-    color: red;
+  color: red;
 }

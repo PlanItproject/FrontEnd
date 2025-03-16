@@ -24,7 +24,7 @@ export const ErrorMessage = styled.p`
 
 
 export const StyledInput = styled.input`
-    width: calc(100% - 40px);
+    width: 100%;
     padding: 18px 20px;
     font-size: 14px;
     border: 1px solid #B3B3B3;
@@ -47,7 +47,7 @@ export const StyledInput = styled.input`
         }
     }
 
-    ${({ hasError }) => hasError && `
+    ${({ $hasError }) => $hasError && `
         border-color: #EB4355;
 
         &::placeholder {
