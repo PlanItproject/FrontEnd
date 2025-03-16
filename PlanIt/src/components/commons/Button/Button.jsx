@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const Button = ({ children, variant = 'primary', size = 'medium', fullWidth, disabled, ...props }) => {
     return (
         <StyledButton
-            variant={variant}
+            $variant={variant}
             size={size}
-            fullWidth={fullWidth}
+            $fullWidth={fullWidth}
             disabled={disabled}
             {...props}
         >

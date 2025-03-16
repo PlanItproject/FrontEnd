@@ -43,7 +43,7 @@ const PostDetailHeader = ({ user }) => {
                     팔로우
                 </SocialBtn>
             </PostProfileWrapper>
-            <button>
+            <button style={{ all: 'unset' }}>
                 <img src={Bookmark} />
             </button>
         </PostHeaderContainer>

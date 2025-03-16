@@ -4,11 +4,12 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const CardContainer = styled.div`
   display: flex;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   border-radius: 16px;
   background: #f5f5f5;
+  pointer-events: auto;
 `;
 
 const CardHeader = styled.div`
@@ -76,6 +77,15 @@ const Title = styled.span`
   font-weight: 400;
   line-height: 145%;
   letter-spacing: -0.14px;
+  margin-bottom: 4px;
+
+  // 줄 수 지정 스타일 추가! 훨씬 간단한거 있으면 지울게요!
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 `;
 
 const Description = styled.span`
@@ -86,14 +96,25 @@ const Description = styled.span`
   line-height: 140%;
   align-self: stretch;
   color: #808080;
+
+  // 줄 수 지정 스타일 추가! 훨씬 간단한거 있으면 지울게요!
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: auto;
-  flex: 1 0 0;
+  min-height: 200px;
+  max-height: 200px;
+  object-fit: cover;
   align-self: stretch;
   border-radius: 0 0 16px 16px;
+  pointer-events: none;
+  cursor: default;
 `;
 
 const Card = ({ info }) => {

@@ -29,7 +29,7 @@ export const Blur = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 999;
+    z-index: 1000;
     backdrop-filter: blur(5px);
 `
 

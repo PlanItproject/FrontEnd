@@ -3,8 +3,7 @@ import styled from "@emotion/styled";
 const CommunityHeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 12px 20px 20px 20px;
-  margin-bottom: -60px;
+  padding: 56px 20px 20px 20px;
   height: auto;
   justify-content: space-between;
   align-items: center;

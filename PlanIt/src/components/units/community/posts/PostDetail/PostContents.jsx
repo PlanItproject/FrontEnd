@@ -1,7 +1,7 @@
 import CATEGORIES from './dummy/dummyCategories';
 import { PostAddressWrapper, ChipWrapper, PostContent, PostContentsContainer, PostCreatedAt, PostCreatedAtWrapper, PostTitle } from "./styles/PostContents.styles";
 import Chip from '../../../../commons/Chip/index';
-import MapMarker from '../../MapMaker/MapMaker'
+import MapMarker from '../../MapMarker/MapMaker'
 
 const PostContents = ({ title, content, createdAt, address, city, country }) => {
     

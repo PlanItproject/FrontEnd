@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Blur, Line, MenuContainer, MenuHeader, MenuItem, UserProfile } from "./PopupMenu.style"
 import ProfileImage from "../Profile/ProfileImage";
 
-const PopupMenu = ({ user, items, onClose, isVisible, actionHandlers }) => {
+const PopupMenu = ({ user, items, onClose, isVisible, actionHandlers, FilterComponent }) => {
     const menuRef = useRef(null);
     const [isAnimating, setIsAnimating] = useState(false) ; // 애니메이션 상태
     const [isClosing, setIsClosing] = useState(false); // 닫기 상태 (slideDown)
@@ -36,11 +36,12 @@ const PopupMenu = ({ user, items, onClose, isVisible, actionHandlers }) => {
     }, [isVisible, onClose]);
 
     const handleClose = () => {
+        console.log("handleClose triggered");
         setIsAnimating(true);
         setIsClosing(true);
         setTimeout(() => {
             onClose(); 
-        }, 300) // 메뉴 외부 클릭 시, 300ms 후 onClose 실행
+        }, 100) // 메뉴 외부 클릭 시, 300ms 후 onClose 실행
     }
 
     const handleAnimationEnd = () => {
@@ -58,7 +59,7 @@ const PopupMenu = ({ user, items, onClose, isVisible, actionHandlers }) => {
 
     return (
         <>
-            <Blur onClick={onClose}/>
+            <Blur onClick={handleClose}/>
             <MenuContainer 
                 ref={menuRef} 
                 isVisible={!isClosing}
@@ -66,11 +67,15 @@ const PopupMenu = ({ user, items, onClose, isVisible, actionHandlers }) => {
             >
                 <MenuHeader><Line /></MenuHeader>
                 {user && (
-                    <UserProfile>
+                    <UserProfile> 
                         {/* ⚠️ 프로필 이미지 없을 때 처리! */}
                         <ProfileImage src={user.profileImage} size={32}/>
                         <span>{user.name}</span>
                     </UserProfile>
+                )}
+
+                {FilterComponent && (
+                    <FilterComponent onClose={handleClose} />
                 )}
 
                 {processedItems.map((item) => (

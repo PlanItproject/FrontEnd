@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import img from "../../../../assets/profile.png";
+import img from "../../../assets/profile.png";
 
 const dummyTravelMates = [
   {

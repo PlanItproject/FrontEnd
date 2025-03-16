@@ -16,8 +16,8 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+  /* font: inherit;
+  vertical-align: baseline; */
 }
 
 /* 블록 요소를 기본적으로 block으로 설정 */
@@ -31,8 +31,10 @@ body {
 }
 
 button {
-  all: unset;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 textarea {

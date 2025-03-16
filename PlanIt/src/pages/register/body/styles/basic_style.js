@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 const FormContainer = styled.div`
     padding: 20px;
     max-width: 500px;
-    margin: -70px auto;
+    margin: 20px auto;
 `;
 
 const Header = styled.div`

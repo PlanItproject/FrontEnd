@@ -4,12 +4,13 @@ import { Home, Globe, Users, Send, Settings } from 'lucide-react';
 const NavContainer = styled.div`
     width: 100%;
     background-color: #f5f5f5;
-    padding: 8px 0;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    padding: 16px 24px 44px 24px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 999;
 `;
 
 const NavInner = styled.div`
@@ -47,7 +48,7 @@ const BottomNavigation = ({ activeTab = 'home'}) => {
         // path 는 임의로 해놓은거라 추후에 결정합시다!
         { id: 'home', label: 'Home', icon: Home, path: '/' },
         { id: 'trips', label: 'My Trips', icon: Globe, path: '/trips' },
-        { id: 'community', label: 'Community', icon: Users, path: '/community' },
+        { id: 'community', label: 'Community', icon: Users, path: '/community/post' },
         { id: 'message', label: 'message', icon: Send, path: '/messages' },
         { id: 'account', label: 'Accont', icon: Settings, path: '/account' },
     ];

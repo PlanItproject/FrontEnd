@@ -24,7 +24,7 @@ export const Link = styled(RouterLink)`
 const LOGIN_MENUS = [
     {name: '계정찾기', page: '/findAccount'},
     {name: '비밀번호 찾기', page: '/findPW'},
-    {name: '문의하기', page: '/contact'},
+    {name: '문의하기', page: '/inquiry/inquiry'},
 ]
 
 const LoginFooter = () => {

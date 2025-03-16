@@ -3,7 +3,7 @@ import LoginHeader from "../../components/units/auth/header/LoginHeader.jsx";
 
 const AuthContainer = styled.div`
   padding: 47px 44px;
-  max-width: 500px;
+  max-width: 580px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

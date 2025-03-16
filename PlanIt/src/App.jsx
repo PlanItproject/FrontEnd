@@ -5,12 +5,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./pages/community/storage/commuStore/store.js";
+import { store } from "./store/store.js"
+
+import './styles/App.css';
 
 import Community from "./pages/community/Community.jsx";
+import PostDetail from "./pages/community/Post/PostDetail.jsx";
 import AuthRoutes from "./routes/AuthRoutes.jsx";
 import InquiryRoutes from "./routes/InquiryRoutes.jsx";
-import PostRoutes from "./routes/post.jsx";
 
 function App() {
   return (
@@ -19,11 +21,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/community/post" />} />
           <Route path="/community/*" element={<Community />} />
-          {/* <Route path="/" element={<Navigate to="/community/post" />} /> */}
+          <Route path="/community/post/:postId" element={<PostDetail />} />
 
           <Route path="/*" element={<AuthRoutes />} />
-          <Route path="/*" element={<InquiryRoutes />} />
-          <Route path="/*" element={<PostRoutes />} />
+          <Route path="/inquiry/*" element={<InquiryRoutes />} />
         </Routes>
       </Router>
     </Provider>

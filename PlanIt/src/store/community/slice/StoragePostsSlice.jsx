@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import img from "../../../../assets/profile.png";
-import run from "../../../../assets/run.jpg";
+import img from "../../../assets/profile.png";
+import run from "../../../assets/run.jpg";
 
 const dummyUserInfo = [
   {

@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import CommunityRoutes from "../../routes/CommunityRoutes.jsx";
 import Tabs from "../../components/commons/Tabs/Tabs.jsx";
-import CommunityHeader from "./Header/CommunityHeader.jsx";
-import { setTab } from "../../pages/community/storage/slice/CommunitySlice.jsx";
+import CommunityHeader from "../../components/units/community/Header/CommunityHeader.jsx";
+import BottomNavigation from "../../components/units/community/navigation/BottomNavigation.jsx";
+import { setTab } from "../../store/community/slice/CommunitySlice.jsx";
+import { Bot } from "lucide-react";
+import { CommunityProvider } from "../../contexts/CommunityProviders.jsx";
 
 const Community = () => {
   const navigate = useNavigate();
@@ -30,11 +33,16 @@ const Community = () => {
   };
 
   return (
-    <div>
-      <CommunityHeader />
-      <Tabs currentTab={currentTab} steps={steps} onTabClick={handleTabClick} />
-      <CommunityRoutes />
-    </div>
+    <CommunityProvider>
+      <div>
+        <CommunityHeader />
+        <div style={{ padding: '0 20px' }}>
+          <Tabs currentTab={currentTab} steps={steps} onTabClick={handleTabClick} />
+        </div>
+        <BottomNavigation />
+        <CommunityRoutes />
+      </div>
+    </CommunityProvider>
   );
 };
 

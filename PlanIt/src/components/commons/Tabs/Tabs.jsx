@@ -2,17 +2,20 @@ import styled from "@emotion/styled";
 
 const HeaderContainer = styled.div`
     display: flex;
-    width: 90%;
+    // width: 90%;
     position: relative;
-    margin: 60px auto;
+    margin: 20px auto;
 `;
 
 const Step = styled.div`
     flex: 1;
     text-align: center;
-    color: #9ca3af;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--text-default-secondary);
     position: relative;
-    padding: 10px 0;
+    padding-bottom: 10px;
+    cursor: pointer;
     &::after {
         content: "";
         position: absolute;

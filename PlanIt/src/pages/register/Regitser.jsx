@@ -5,9 +5,9 @@ import Register_body from "./body/BasicInform.jsx";
 import EmailVerification from "./body/EmailVerification.jsx";
 import ProfileSetting from "./body/ProfileSetting.jsx";
 import Tabs from "../../components/commons/Tabs/Tabs.jsx";
-import { setTab } from "../community/storage/slice/CommunitySlice.jsx"
+import { setTab } from "../../store/community/slice/CommunitySlice.jsx"
 
-const register = () => {
+const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const register = () => {
   };
 
   return (
-      <div>
+      <div style={{ padding: '20px' }}>
         <Tabs currentTab={currentTab} steps={steps} onTabClick={handleTabClick} />
         <Routes>
           <Route path="registerBody" element={<Register_body />} />
@@ -41,4 +41,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

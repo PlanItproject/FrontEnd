@@ -30,5 +30,6 @@ export const CommentBox = styled.textarea`
 `;
 
 export const SendButton = styled.button`
+    all: unset;
     margin-left: 8px;
 `;
