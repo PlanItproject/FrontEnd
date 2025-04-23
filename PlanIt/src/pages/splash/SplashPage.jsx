@@ -4,6 +4,7 @@ import { keyframes } from "@emotion/react";
 import {useEffect, useState} from "react";
 import Splash from "./splash/Splash.jsx";
 import LoginModal from "./loginmodal/LoginModal.jsx";
+import { setLanguage } from "../../api/common.js";
 
 const squish = keyframes`
     0% { transform: scale(1, 1); }
@@ -65,9 +66,14 @@ const SplashPage = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const handleLanguageSelect = (lang) => {
+    const handleLanguageSelect = async (lang) => {
         setSelectedLanguage(lang);
-        localStorage.setItem("lang", lang);
+        try {
+            const serverLang = lang === 'ko' ? 'KOREAN' : 'ENGLISH';
+            await setLanguage(serverLang);
+        } catch (error) {
+            console.error("언어 설정 실패: ",error);
+        }
     }
 
     return (

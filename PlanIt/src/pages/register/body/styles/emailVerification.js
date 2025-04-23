@@ -67,18 +67,19 @@ const Input = styled.input`
 `;
 
 const VerifyButton = styled.button`
+    padding: 4px 10px;
     position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    padding: 8px;
-    background-color: #DBEAFE;
-    color: #2563EB;
-    border: none;
-    border-radius: 8px;
+    z-index: 1;
+    top: 39px;
+    right: 24px;
+    background-color: ${(props) => (props.disabled ? '#D9D9D9' : '#DBEBFF')};
+    color: ${(props) => (props.disabled ? '#B3B3B3' : '#006DF5')};
+    border:none;
+    border-radius: 6px;
+    font-family: var(--font-family-body);
     font-size: 14px;
-    white-space: nowrap;
-    cursor: pointer;
+    line-height: 1.4;
+    cursor:pointer;
 `;
 
 const ResendText = styled.div`

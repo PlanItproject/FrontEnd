@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 const Container = styled.div`
     padding: 20px;
@@ -9,13 +9,13 @@ const Container = styled.div`
 
 const FormHeader = styled.div`
     display: flex;
+    align-items: center;
     gap: 40px;
 `
 
 const Header = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
 `;
 
 const BackButton = styled.button`
@@ -33,15 +33,15 @@ const BackButton = styled.button`
 const Title = styled.h1`
     font-size: 32px;
     font-weight: bold;
-    margin-bottom: 42px;
 `;
 
 const ProfileContainer = styled.div`
     display: flex;
     justify-content: center;
     padding: 50px;
-    background-color: rgb(243,243,243);
-    margin-bottom: 16px;
+    margin: 20px 0;
+    background: var(--color-background-default-secondary);
+    border-radius: 20px;
 `;
 
 const ProfileWrapper = styled.div`
@@ -53,6 +53,7 @@ const ProfileImage = styled.img`
     height: 100px;
     border-radius: 50%;
     background-color: #3b82f6;
+    object-fit: cover;
 `;
 
 const AddButton = styled.button`
@@ -60,8 +61,8 @@ const AddButton = styled.button`
     bottom: 50px;
     right: -20px;
     border: none;
-    background: #dbebff;
-    color: #3b82f6;
+    background: var(--color-background-brand-tertiary);
+    color: #2988FF;
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -74,8 +75,10 @@ const AddButton = styled.button`
 
 const Label = styled.label`
     display: block;
-    margin-bottom: 8px;
+    margin: 0 0 6px 20px;
     font-size: 14px;
+    font-weight: 600;
+    line-height: 1.45;
 
     &::after {
         content: '*';
@@ -92,13 +95,32 @@ const Input = styled.input`
     font-size: 16px;
 `;
 
-const Select = styled.select`
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-`;
+// const Select = styled.select`
+//     width: 100%;
+//     padding: 18px 20px;
+//     border: 1px solid var(--color-border-neutral-secondary);
+//     border-radius: 28px;
+//     background: var(--color-background-default-default);
+//     color: var(--color-text-default);
+//     appearance: none;
+//     cursor: pointer;
+//     font-size: 14px;
+
+//     option {
+//         padding: 8px 12px;
+//         font-size: 14px;
+//         line-height: 1.5;
+//         cursor: pointer;
+//     }
+// `;
+
+// const DropDown = styled.div`
+//     position: absolute;
+//     right: 20px;
+//     bottom: 13px;
+//     pointer-events: none;
+//     width: 16px;
+// `;
 
 const GenderContainer = styled.div`
     display: flex;
@@ -110,7 +132,44 @@ const GenderLabel = styled.label`
     display: flex;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
+    margin: 10px;
 `;
+
+const radioStyles = {
+    hiddenRadio: {
+        display: "none"
+    },
+    customRadio: {
+        width: "20px",
+        height: "20px",
+        border: "2px solid #aaa",
+        borderRadius: "50%",
+        display: "inline-block",
+        position: "relative",
+        transition: "border-color 0.2s ease"
+    },
+    checkedRadio: {
+        borderColor: "var(--color-icon-brand-default)"
+    },
+    radioIndicator: {
+        content: "",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "10px",
+        height: "10px",
+        borderRadius: "50%",
+        transition: "background-color 0.2s ease"
+    },
+    radioIndicatorChecked: {
+        backgroundColor: "var(--color-icon-brand-default)",
+    },
+    radioIndicatorUncheked: {
+        backgroundColor: "var(--color-background-netural-secondary)",
+    }
+}
 
 export {
     Container,
@@ -124,7 +183,9 @@ export {
     Label,
     AddButton,
     Input,
-    Select,
+    // Select,
+    // DropDown,
     GenderContainer,
     GenderLabel,
+    radioStyles
 }
