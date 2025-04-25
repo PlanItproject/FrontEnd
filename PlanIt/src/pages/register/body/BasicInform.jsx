@@ -4,8 +4,11 @@ import Button from '../../../components/commons/Button/Button.jsx'
 import Input from '../../../components/commons/Input/Input.jsx';
 import * as basic from "./styles/basic_style.js"
 import { authApi } from '../../../api/auth.js';
+import { useNavigate } from 'react-router-dom';
 
 const BasicInform = ({ onNext, formData, setFormData }) => {
+    const navigate = useNavigate();
+
     const [errors, setErrors] = useState({
         name: '',
         phone: '',
@@ -123,7 +126,7 @@ const BasicInform = ({ onNext, formData, setFormData }) => {
         <basic.FormContainer>
             <basic.FormHeader>
                 <basic.Header>
-                    <basic.BackButton>
+                    <basic.BackButton onClick={() => navigate(-1)}>
                         <ChevronLeft size={20} color="#4B5563" />
                     </basic.BackButton>
                 </basic.Header>

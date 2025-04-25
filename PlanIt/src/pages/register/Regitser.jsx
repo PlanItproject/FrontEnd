@@ -21,7 +21,7 @@ const Register = () => {
     passwordConfirm: '',
     termsAgreed: false,
     privacyAgreed: false,
-});
+  });
 
   const steps = [
     { label: "기본 정보 입력", path: "registerBody" },
@@ -41,7 +41,10 @@ const Register = () => {
     navigate(`/register/${path}`);
   };
 
-  const onNext = () => {
+  const onNext = (data = null) => {
+    if (data) {
+      setFormData(data);
+    }
     setCurrentStep((prevStep) => prevStep + 1);
     navigate(`/register/${steps[currentStep + 1].path}`);
   };
@@ -52,7 +55,7 @@ const Register = () => {
         <Routes>
           <Route path="registerBody" element={<Register_body onNext={onNext} formData={formData} setFormData={setFormData}/>} />
           <Route path="emailVerification" element={<EmailVerification onNext={onNext} registerdEmail={formData.email}/>} />
-          <Route path="profileSetting" element={<ProfileSetting onNext={onNext}/>} />
+          <Route path="profileSetting" element={<ProfileSetting onNext={onNext} registerdEmail={formData.email} />} />
         </Routes>
       </div>
   );

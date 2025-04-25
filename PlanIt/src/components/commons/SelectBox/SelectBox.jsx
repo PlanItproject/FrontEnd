@@ -89,7 +89,6 @@ function SelectBox({ value, onChange, options, name }) {
         typeof option === 'object' ? option : { value: option, label: option }
     );
 
-    const selectedOption = selectOptions.find(option => option.value === value) || null;
 
     return (
         <div style={{ position: 'relative' }}>

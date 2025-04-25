@@ -4,13 +4,13 @@ import Input from '../../../components/commons/Input/Input.jsx';
 import Button from '../../../components/commons/Button/Button.jsx'
 import * as Email from './styles/emailVerification.js'
 import { authApi } from '../../../api/auth.js';
+import { useNavigate } from "react-router-dom";
 
 
 const EmailVerification = ({ onNext, registerdEmail }) => {
-    const [formData, setFormData] = useState({
-        email: '',
-        verificationCode: ''
-    });
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({ verificationCode: '' });
 
     const [errors, setErrors] = useState({
         email: '',
@@ -32,17 +32,17 @@ const EmailVerification = ({ onNext, registerdEmail }) => {
         console.log('인증요청 시작');
 
 
-        if (formData.email !== registerdEmail) {
-            setErrors(prev => ({
-                ...prev,
-                email: "이메일이 일치하지 않습니다."
-            }));
-            setIsSent(false);
-            return;
-        }
+        // if (formData.email !== registerdEmail) {
+        //     setErrors(prev => ({
+        //         ...prev,
+        //         email: "이메일이 일치하지 않습니다."
+        //     }));
+        //     setIsSent(false);
+        //     return;
+        // }
 
         try {
-            const res = await authApi.sendEmailCode(formData.email);
+            const res = await authApi.sendEmailCode(registerdEmail);
             setIsSent(true);
             setErrors({ ...errors, email: '' });
         } catch(error) {
@@ -65,8 +65,8 @@ const EmailVerification = ({ onNext, registerdEmail }) => {
 
         try {
             const res = await authApi.verifyEmail({
-                email: formData.email,
-                code: formData.verificationCode,
+                email: registerdEmail,
+                verificationCode: formData.verificationCode,
             }); 
             onNext();
         } catch(error) {
@@ -81,7 +81,7 @@ const EmailVerification = ({ onNext, registerdEmail }) => {
         e.preventDefault();
         // 인증번호 재발송 로직 추가
         try {
-            const res = await authApi.resendEmailCode(formData.email);
+            const res = await authApi.resendEmailCode(registerdEmail);
         } catch(error) {
             alert('안된다')
         }
@@ -91,7 +91,7 @@ const EmailVerification = ({ onNext, registerdEmail }) => {
         <Email.Container>
             <Email.FormHeader>
                 <Email.Header>
-                    <Email.BackButton>
+                    <Email.BackButton onClick={() => navigate(-1)}>
                         <ChevronLeft size={20} color="#4B5563" />
                     </Email.BackButton>
                 </Email.Header>
@@ -104,16 +104,17 @@ const EmailVerification = ({ onNext, registerdEmail }) => {
                         type="email"
                         label="이메일 주소"
                         name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="abc@gmail.com"
+                        value={registerdEmail}
+                        readOnly
+                        // onChange={handleChange}
+                        // placeholder="abc@gmail.com"
                         error={errors.email}
                         $hasError={errors.email}
-                        required
+                        // required
                     />
                     <Email.VerifyButton 
                         onClick={handleSendCode} 
-                        disabled={isSent || !formData.email.trim()}
+                        disabled={isSent || !registerdEmail}
                         type="button"
                     >
                         {isSent ? '전송완료' : '인증하기'}
