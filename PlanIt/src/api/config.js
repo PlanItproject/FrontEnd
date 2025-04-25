@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000';
+// const API_URL = 'http://54.206.71.88:9090/';
+const API_URL = '/api/';
 
 // 모든 API 요청의 기본 설정을 하는 부분입니다.
 const createAxiosInstance = () => {
@@ -11,7 +12,9 @@ const createAxiosInstance = () => {
         // 모든 요청에 기본으로 붙는 헤더이고, JSON 형식으로 통신을 할거에요! 라고 설정을 한겁니다.
         headers: {
             'Content-Type': 'application/json',
-        }
+        },
+        // cookie 보내기
+        withCredentials: true,
     });
 
     // 요청 인터셉터
@@ -47,7 +50,8 @@ const createAxiosInstance = () => {
                 // 여기에 로그인 페이지로 리다이렉트 등을 처리
             }
 
-            return Promise.reject(errorResponse);
+            // return Promise.reject(errorResponse);
+            return Promise.reject(error);
         }
     )
     return instance;

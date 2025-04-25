@@ -20,7 +20,7 @@ const LoginModal = (
             <loginModal.ModalTitle>LOG IN</loginModal.ModalTitle>
             <loginModal.ModalSubTitle>
                 아직 회원이 아니신가요?
-                <button onClick={() => navigate("/register")} style={{
+                <button onClick={() => navigate("/register/registerBody")} style={{
                     color: '#6b7280',
                     border: 'none',
                     background: 'none',

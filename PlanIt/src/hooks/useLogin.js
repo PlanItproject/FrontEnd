@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../api/auth';
-// import { authApiMock } from '../api/authApiMock';
 
 const useLogin = () => {
     const [email, setEmail] = useState('');
@@ -12,26 +11,38 @@ const useLogin = () => {
 
     useEffect(() => {
         // 자동 로그인 확인
-        // Access Token을 httpOnly Cookie로 제공하여 자동 인증하는 경우 아래의 로직은 수정
-        const token = localStorage.getItem('token');
-        const tokenExpiry = localStorage.getItem('TokenExpiry');
-
-        console.log("현재 token", token);
-        console.log("현재 tokenExpiry", tokenExpiry);
-
-        if (!token || !tokenExpiry || Number(tokenExpiry) < Date.now()) {
-            console.log("Access Token 만료됨, 로그인 필요");
-            localStorage.removeItem('token');
-            localStorage.removeItem('TokenExpiry');
-            
-            // 현재 페이지가 /login이 아닌 경우에만 이동
-            if (window.location.pathname !== "/login") {
+        // httpsOnly Cookie로 변경되어 로직 수정
+        const checkAuth = async () => {
+            try {
+                await authApi.me();
+                console.log("자동 로그인 성공");
+            } catch (e) {
+                console.log("자동 로그인 실패");
                 navigate('/login');
             }
-        } else {
-            console.log("자동 로그인 성공: 토큰 유효");
-            // navigate('/welcome');
-        }
+        };
+        checkAuth();
+
+        // // Access Token을 httpOnly Cookie로 제공하여 자동 인증하는 경우 아래의 로직은 수정
+        // const token = localStorage.getItem('token');
+        // const tokenExpiry = localStorage.getItem('TokenExpiry');
+
+        // console.log("현재 token", token);
+        // console.log("현재 tokenExpiry", tokenExpiry);
+
+        // if (!token || !tokenExpiry || Number(tokenExpiry) < Date.now()) {
+        //     console.log("Access Token 만료됨, 로그인 필요");
+        //     localStorage.removeItem('token');
+        //     localStorage.removeItem('TokenExpiry');
+            
+        //     // 현재 페이지가 /login이 아닌 경우에만 이동
+        //     if (window.location.pathname !== "/login") {
+        //         navigate('/login');
+        //     }
+        // } else {
+        //     console.log("자동 로그인 성공: 토큰 유효");
+        //     // navigate('/welcome');
+        // }
     }, [navigate]);
 
     const handleChangeEmail = (e) => setEmail(e.target.value.trim());
@@ -53,15 +64,20 @@ const useLogin = () => {
         setLoading(true);
 
         try{
-            const response = await authApi.login({ email, password });
+            await authApi.login({ email, password }); // 쿠키 자동 저장
+            navigate('/welcome');
 
-            localStorage.setItem("token", response.data.Token);
-            localStorage.setItem("TokenExpiry", Date.now() + 24 * 60 * 60 * 1000); // 만료 시간
-            // localStorage.setItem("user", JSON.stringify(response.data.user));
+            // const response = await authApi.login({ email, password });
+
+            // localStorage.setItem("token", response.data.Token);
+            // localStorage.setItem("TokenExpiry", Date.now() + 24 * 60 * 60 * 1000); // 만료 시간
+            // // localStorage.setItem("user", JSON.stringify(response.data.user));
 
             navigate('/welcome');
         } catch(error) {
             setError("아이디나 비밀번호를 다시 확인해주세요.");
+            // setLoading(false);
+        } finally {
             setLoading(false);
         }
     }

@@ -6,16 +6,18 @@ const FormContainer = styled.div`
     margin: 20px auto;
 `;
 
+const FormHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin: 20px 0 40px 0;
+`
+
 const Header = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
 `;
 
-const FormHeader = styled.div`
-    display: flex;
-    gap: 40px;
-`
 
 const BackButton = styled.button`
     width: 48px;
@@ -23,7 +25,7 @@ const BackButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #EFF6FF;
+    background-color: var(--color-background-brand-tertiary);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -32,7 +34,6 @@ const BackButton = styled.button`
 const Title = styled.h1`
     font-size: 32px;
     font-weight: bold;
-    margin-bottom: 42px;
 `;
 
 const FormGroup = styled.div`
@@ -41,25 +42,14 @@ const FormGroup = styled.div`
 
 const Label = styled.label`
     display: block;
-    margin-bottom: 8px;
+    margin: 0 0 6px 20px;
     font-size: 14px;
+    font-weight: 600;
+    line-height: 1.45;
     
     &::after {
-        content: '*';
-        color: #f00;
-        margin-left: 2px;
-    }
-`
-
-const Input = styled.input`
-    width: 90%;
-    padding: 15px;
-    border: 1px solid #E5E7EB;
-    border-radius: 50px;
-    font-size: 14px;
-    
-    &::placeholder {
-        color: #9CA3AF;
+        content: ' *';
+        color:  #EF2B9D;
     }
 `
 
@@ -79,6 +69,16 @@ const Checkbox = styled.input`
     margin-right: 8px;
 `
 
+const errorMessage = styled.div`
+    display: block;
+    text-align: center;
+    padding: 8px 0 ;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #EB4335;
+`;
+
 export {
     FormContainer,
     Header,
@@ -87,8 +87,8 @@ export {
     BackButton,
     Title,
     Label,
-    Input,
     CheckboxGroup,
     CheckboxLabel,
     Checkbox,
+    errorMessage
 }

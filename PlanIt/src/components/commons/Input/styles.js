@@ -22,21 +22,22 @@ export const ErrorMessage = styled.p`
     color: #EB4335;
 `
 
-
 export const StyledInput = styled.input`
     width: 100%;
     padding: 18px 20px;
     font-size: 14px;
-    border: 1px solid #B3B3B3;
+    border: 1px solid var(--color-border-neutral-secondary);
     border-radius: 28px;
     outline: none;
+    background: transparent;
+    color: var(--color-text-default-default);
 
     &::placeholder {
         font-family: var(--font-family-body);
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 400; 
         line-height: 1.4;
-        color: #808080;
+        color: var(--text-default-secondary);
     }
 
     &:focus {
