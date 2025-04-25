@@ -34,8 +34,8 @@ export const PostMenuLink = styled(RouterLink)`
 `;
 
 const POST_MENUS = [
-    {name: '포스트 작성하기', page: '/post-form'},
-    {name: '여행메이트 구하기', page: '/mate-form'}
+    {name: '포스트 작성하기', page: '/community/postEditor'},
+    {name: '여행메이트 구하기', page: '/community/mate-form'}
 ];
 
 const PostMenuModal = ({ isOpen, onClose }) => {
