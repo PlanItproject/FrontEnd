@@ -90,8 +90,6 @@ function SelectBox({ value, onChange, options, name }) {
     );
 
 
-    const selectedOption = selectOptions.find(option => option.value === value) || null;
-
     return (
         <div style={{ position: 'relative' }}>
             <Select 
