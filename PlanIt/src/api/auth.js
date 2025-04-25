@@ -25,7 +25,7 @@ export const authApi = {
     completeRegister: (data) =>
         api.post('/public/users/register/final', data, {
             headers: {
-                'Content-Type' : undefined,
+                // 'Content-Type' : 'multipart/form-data',
             },
             withCredentials: true,
         }),

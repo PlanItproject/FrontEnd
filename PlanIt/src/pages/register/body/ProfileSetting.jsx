@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import profile from "../../../assets/profile.png";
@@ -6,7 +7,6 @@ import Input from "../../../components/commons/Input/Input.jsx";
 import Button from "../../../components/commons/Button/Button.jsx";
 import * as profileSetting from "./styles/profileSetting_style.js";
 import SelectBox from "../../../components/commons/SelectBox/SelectBox.jsx";
-import { authApi } from "../../../api/auth.js";
 
 const mbtiTypes = [
   "ISTJ", "ISFJ", "INFJ", "INTJ",
@@ -61,7 +61,7 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
       email: registerdEmail,
       nickname: profileData.nickname,
       mbti: profileData.mbti,
-      gender: profileData.gender
+      gender: profileData.gender === "남성" ? "MALE" : "FEMALE"
     }
 
     form.append('data', JSON.stringify(data));
@@ -69,7 +69,6 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
 
     if (profileData.profileImg) {
       form.append("profile", profileData.profileImg);
-      console.log('업로드 프로필 이미지', profileData.profileImg);
     } else { 
       // 이미지가 없으면 기본 프로필 추가
       try {
@@ -94,14 +93,14 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
     }
 
     try {
-      const res = await authApi.completeRegister(form);
-      console.log(res);
+      const res = await axios.post('/api/public/users/register/final', form, {withCredentials: true});
       navigate("/welcome");
     } catch (error) {
+      console.log("전체 오류 객체 : ", error);
 
       if (error.response) {
         console.log("서버 응답 상태:", error.response.status);
-        console.log("서버 응답 내용:", error.response.data);
+        console.log("서버 응답 내용:", error.response?.data);
       } else {
         console.error("서버 응답 없음");
       }
