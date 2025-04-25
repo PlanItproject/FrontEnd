@@ -1,5 +1,5 @@
 import { ChevronLeft } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import profile from "../../../assets/profile.png";
 import { useNavigate } from "react-router-dom";
 import Input from "../../../components/commons/Input/Input.jsx";
@@ -15,57 +15,78 @@ const mbtiTypes = [
   "ESTJ", "ESFJ", "ENFJ", "ENTJ"
 ]
 
-const ProfileSetting = () => {
-  const [formData, setFormData] = useState({
-    nickname: "",
-    mbti: "ENTJ",
-    gender: "남성",
-    profileImage: null,
-    previewUrl: null, // 이미지 미리보기
+const ProfileSetting = ({ onNext, registerdEmail }) => {
+  useEffect(() => {
+    console.log("email", registerdEmail);
+  },[registerdEmail])
 
-  });
   const navigate = useNavigate();
 
+  const [profileData, setProfileData] = useState({
+    nickname: '',
+    mbti: 'ENTJ',
+    gender: '남성',
+    profileImg: null,
+  })
+  const [previewUrl, setPreviewUrl] = useState(null);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setProfileData({...profileData, [e.target.name]:e.target.value})
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData((prev) => ({
+      const reader = new FileReader();
+
+      setProfileData((prev) => ({
         ...prev,
-        profileImage: file,
-        previewUrl: URL.createObjectURL(file),
+        profileImg: file
       }))
     }
+
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
   }
 
   const handleSubmit = async () => {
-    if (!formData.nickname.trim()) {
+    if (!profileData.nickname.trim()) {
       alert("닉네임을 입력해주세요.");
       return;
     }
 
     const form = new FormData();
-    form.append(
-      "data",
-      JSON.stringify({
-        nickname: formData.nickname,
-        mbti: formData.mbti,
-        gender: formData.gender,
-      })
-    );
 
-    if (formData.profileImage) {
-      form.append("profile", formData.profileImage);
-    } else { // 사용자가 프로필 이미지 설정하지 않았을 시(required*)
+    const data = {
+      email: registerdEmail,
+      nickname: profileData.nickname,
+      mbti: profileData.mbti,
+      gender: profileData.gender
+    }
+
+    form.append('data', JSON.stringify(data));
+
+
+    if (profileData.profileImg) {
+      form.append("profile", profileData.profileImg);
+      console.log('업로드 프로필 이미지', profileData.profileImg);
+    } else { 
+      // 이미지가 없으면 기본 프로필 추가
       try {
-        const res = await fetch(profile);
+        const defaultImg = profile;
+        const res = await fetch(defaultImg);
+
+        if(!res.ok) {
+          throw new Error("기본 이미지를 불러올 수 없습니다.")
+        }
+
         const blob = await res.blob();
         const defaultFile = new File([blob], "default-profile.png", {
           type: blob.type,
-        })
+        });
+
+        form.append("profile", defaultFile); // 누락
+        console.log('기본이미지', defaultFile);
       } catch (error) {
           alert("기본 프로필 이미지를 불러오는 데 실패했습니다.");
           return;
@@ -74,8 +95,17 @@ const ProfileSetting = () => {
 
     try {
       const res = await authApi.completeRegister(form);
+      console.log(res);
       navigate("/welcome");
     } catch (error) {
+
+      if (error.response) {
+        console.log("서버 응답 상태:", error.response.status);
+        console.log("서버 응답 내용:", error.response.data);
+      } else {
+        console.error("서버 응답 없음");
+      }
+
       alert("프로필 설정 중 오류가 발생했습니다. 다시 시도해주세요.");
     }
 
@@ -85,7 +115,7 @@ const ProfileSetting = () => {
     <profileSetting.Container>
       <profileSetting.FormHeader>
         <profileSetting.Header>
-          <profileSetting.BackButton>
+          <profileSetting.BackButton onClick={() => navigate(-1)}>
             <ChevronLeft size={20} color="#4B5563" />
           </profileSetting.BackButton>
         </profileSetting.Header>
@@ -97,7 +127,7 @@ const ProfileSetting = () => {
         <profileSetting.ProfileWrapper>
           <label htmlFor="profile-upload" style={{ cursor: "pointer" }}>
             <profileSetting.ProfileImage 
-              src={formData.previewUrl || profile} 
+              src={previewUrl || profile} 
               alt="Profile" 
             />
             <profileSetting.AddButton>+</profileSetting.AddButton>
@@ -117,7 +147,7 @@ const ProfileSetting = () => {
         <Input 
           type="text"
           name="nickname"
-          value={formData.nickname}
+          value={profileData.nickname}
           onChange={handleChange}
           placeholder="글자 수 제한"
         />
@@ -125,23 +155,9 @@ const ProfileSetting = () => {
 
       <div style={{ marginTop: "16px", position: "relative" }}>
         <profileSetting.Label>MBTI</profileSetting.Label>
-        {/* <profileSetting.Select 
-          name="mbti" 
-          value={formData.mbti} 
-          onChange={handleChange}
-        >
-          {mbtiTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </profileSetting.Select>
-        <profileSetting.DropDown>
-          <ChevronDown  size={20} color="#2988ff"/>
-        </profileSetting.DropDown> */}
         <SelectBox 
           name="mbti"
-          value={formData.mbti}
+          value={profileData.mbti}
           onChange={handleChange}
           options={mbtiTypes}
         />
@@ -155,7 +171,7 @@ const ProfileSetting = () => {
               type="radio"
               name="gender"
               value="남성"
-              checked={formData.gender === "남성"}
+              checked={profileData.gender === "남성"}
               onChange={handleChange}
               id="profile-male"
               style={profileSetting.radioStyles.hiddenRadio}
@@ -163,7 +179,7 @@ const ProfileSetting = () => {
             <span
               style={{
                 ...profileSetting.radioStyles.customRadio,
-                ...(formData.gender === "남성" 
+                ...(profileData.gender === "남성" 
                     ? profileSetting.radioStyles.checkedRadio
                     : {}
                   )
@@ -172,7 +188,7 @@ const ProfileSetting = () => {
               <span 
                 style={{
                   ...profileSetting.radioStyles.radioIndicator,
-                  ...(formData.gender === "남성"
+                  ...(profileData.gender === "남성"
                       ? profileSetting.radioStyles.radioIndicatorChecked
                       : profileSetting.radioStyles.radioIndicatorUncheked
                   )
@@ -186,7 +202,7 @@ const ProfileSetting = () => {
               type="radio"
               name="gender"
               value="여성"
-              checked={formData.gender === "여성"}
+              checked={profileData.gender === "여성"}
               onChange={handleChange}
               id="profile-female"
               style={profileSetting.radioStyles.hiddenRadio}
@@ -195,7 +211,7 @@ const ProfileSetting = () => {
               htmlFor="profile-female" 
               style={{
                 ...profileSetting.radioStyles.customRadio,
-                ...(formData.gender === "여성" 
+                ...(profileData.gender === "여성" 
                     ? profileSetting.radioStyles.checkedRadio
                     : {}
                   )
@@ -204,7 +220,7 @@ const ProfileSetting = () => {
               <span 
                 style={{
                   ...profileSetting.radioStyles.radioIndicator,
-                  ...(formData.gender === "여성"
+                  ...(profileData.gender === "여성"
                       ? profileSetting.radioStyles.radioIndicatorChecked
                       : profileSetting.radioStyles.radioIndicatorUncheked
                   )
