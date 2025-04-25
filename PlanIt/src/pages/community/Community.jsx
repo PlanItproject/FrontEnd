@@ -15,6 +15,8 @@ const Community = () => {
   const dispatch = useDispatch();
   const currentTab = useSelector((state) => state.community.currentTab);
 
+  const isEditorPage = location.pathname.includes("postEditor") || location.pathname.includes("postPreview");
+
   // Router 로 변경
   const steps = [
     { label: "포스트", path: "post" },
@@ -35,11 +37,13 @@ const Community = () => {
   return (
     <CommunityProvider>
       <div>
-        <CommunityHeader />
+      {!isEditorPage && <CommunityHeader />}
         <div style={{ padding: '0 20px' }}>
-          <Tabs currentTab={currentTab} steps={steps} onTabClick={handleTabClick} />
+          {!isEditorPage && 
+            <Tabs currentTab={currentTab} steps={steps} onTabClick={handleTabClick} />
+          }
         </div>
-        <BottomNavigation />
+        {!isEditorPage && <BottomNavigation />}
         <CommunityRoutes />
       </div>
     </CommunityProvider>

@@ -16,6 +16,9 @@ import PostDetail from "./pages/community/Post/PostDetail.jsx";
 import AuthRoutes from "./routes/AuthRoutes.jsx";
 import Register from "./pages/register/Regitser.jsx";
 import InquiryRoutes from "./routes/InquiryRoutes.jsx";
+import SplashPage from "./pages/splash/SplashPage.jsx";
+
+// document.cookie = "language=KOREAN; path=/; domain=54.252.52.26";
 
 function App() {
   return (
@@ -30,7 +33,6 @@ function App() {
           <Route path="/" element={<Navigate to="/community/post" />} />
           <Route path="/community/*" element={<Community />} />
           <Route path="/community/post/:postId" element={<PostDetail />} />
-
         </Routes>
       </Router>
     </Provider>
