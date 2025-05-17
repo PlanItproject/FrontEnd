@@ -89,7 +89,7 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
     }
 
     try {
-      const res = await axios.post('http://3.106.165.149:9090/public/users/register/final', form, {
+      const res = await axios.post('http://3.24.148.236:9090/public/users/register/final', form, {
         withCredentials: true
       });
       navigate("/login");
