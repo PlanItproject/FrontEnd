@@ -30,7 +30,7 @@ const LoginBody = ({
                     value={email}
                     onChange={handleChangeEmail}
                     placeholder='가입 시 등록한 이메일을 입력해주세요.'
-                    hasError={error && (
+                    error={error && (
                         error.includes("이메일") || error.includes("올바른 이메일 형식")
                     )}
                     required
@@ -42,7 +42,7 @@ const LoginBody = ({
                     value={password}
                     onChange={handleChangePassword}
                     placeholder='10자 이상 영문, 특수문자, 숫자 등 2가지 조합'
-                    hasError={error && (
+                    error={error && (
                         error.includes("비밀번호")
                     )}
                     required  

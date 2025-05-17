@@ -232,6 +232,10 @@ const BasicInform = ({ onNext, formData, setFormData }) => {
                     </basic.CheckboxGroup>
                     {errors.terms && <basic.errorMessage>{errors.terms}</basic.errorMessage>}
                     {errors.general && <basic.errorMessage>{errors.general}</basic.errorMessage>}
+                    <basic.GoToLogin>
+                        <span>이미 계정이 있으신가요?</span>
+                        <button onClick={() => navigate('/login')}>로그인하기</button>
+                    </basic.GoToLogin>
                     <Button variant="primary" size="large" fullWidth type="submit"> 다음으로 </Button>
                 </form>
 

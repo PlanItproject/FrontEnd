@@ -69,6 +69,21 @@ const Checkbox = styled.input`
     margin-right: 8px;
 `
 
+const GoToLogin = styled.div`
+    margin-top: 44px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.45;
+
+    button {
+        color: var(--color-text-default-default);
+        border-bottom: 1px solid var(--color-text-default-default);
+        cursor: pointer;
+        margin: 8px;
+    }
+`
+
 const errorMessage = styled.div`
     display: block;
     text-align: center;
@@ -90,5 +105,6 @@ export {
     CheckboxGroup,
     CheckboxLabel,
     Checkbox,
+    GoToLogin,
     errorMessage
 }

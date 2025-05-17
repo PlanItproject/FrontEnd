@@ -7,6 +7,7 @@ import Input from "../../../components/commons/Input/Input.jsx";
 import Button from "../../../components/commons/Button/Button.jsx";
 import * as profileSetting from "./styles/profileSetting_style.js";
 import SelectBox from "../../../components/commons/SelectBox/SelectBox.jsx";
+import { BackButton, FormHeader, Header, Title } from './styles/basic_style.js';
 
 const mbtiTypes = [
   "ISTJ", "ISFJ", "INFJ", "INTJ",
@@ -16,10 +17,6 @@ const mbtiTypes = [
 ]
 
 const ProfileSetting = ({ onNext, registerdEmail }) => {
-  useEffect(() => {
-    console.log("email", registerdEmail);
-  },[registerdEmail])
-
   const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState({
@@ -85,7 +82,6 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
         });
 
         form.append("profile", defaultFile); // 누락
-        console.log('기본이미지', defaultFile);
       } catch (error) {
           alert("기본 프로필 이미지를 불러오는 데 실패했습니다.");
           return;
@@ -93,18 +89,11 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
     }
 
     try {
-      const res = await axios.post('/api/public/users/register/final', form, {withCredentials: true});
-      navigate("/welcome");
+      const res = await axios.post('http://3.106.165.149:9090/public/users/register/final', form, {
+        withCredentials: true
+      });
+      navigate("/login");
     } catch (error) {
-      console.log("전체 오류 객체 : ", error);
-
-      if (error.response) {
-        console.log("서버 응답 상태:", error.response.status);
-        console.log("서버 응답 내용:", error.response?.data);
-      } else {
-        console.error("서버 응답 없음");
-      }
-
       alert("프로필 설정 중 오류가 발생했습니다. 다시 시도해주세요.");
     }
 
@@ -112,15 +101,14 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
 
   return (
     <profileSetting.Container>
-      <profileSetting.FormHeader>
-        <profileSetting.Header>
-          <profileSetting.BackButton onClick={() => navigate(-1)}>
+      <FormHeader>
+        <Header>
+          <BackButton onClick={() => navigate(-1)}>
             <ChevronLeft size={20} color="#4B5563" />
-          </profileSetting.BackButton>
-        </profileSetting.Header>
-
-        <profileSetting.Title>회원가입</profileSetting.Title>
-      </profileSetting.FormHeader>
+          </BackButton>
+        </Header>
+        <Title>회원가입</Title>
+      </FormHeader>
 
       <profileSetting.ProfileContainer>
         <profileSetting.ProfileWrapper>
@@ -139,6 +127,7 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
             onChange={handleImageChange}
           />
         </profileSetting.ProfileWrapper>
+        <span>* 이미지 파일은 1MB 이하만 업로드 가능합니다. *</span>
       </profileSetting.ProfileContainer>
 
       <div>
@@ -237,8 +226,9 @@ const ProfileSetting = ({ onNext, registerdEmail }) => {
         size="large"
         fullWidth
         onClick={handleSubmit}
+        style={{ marginTop: "67px" }}
       >
-        가입하기
+        시작하기
       </Button>
     </profileSetting.Container>
   );
