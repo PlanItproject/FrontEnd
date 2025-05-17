@@ -1,54 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authApi } from '../api/auth';
+import { useAuth } from '../contexts/authContext';
 
 const useLogin = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null);
+    const { login, logout } = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // 자동 로그인 확인
-        // httpsOnly Cookie로 변경되어 로직 수정
-        const checkAuth = async () => {
-            try {
-                await authApi.me();
-                console.log("자동 로그인 성공");
-            } catch (e) {
-                console.log("자동 로그인 실패");
-                navigate('/login');
-            }
-        };
-        checkAuth();
-
-        // // Access Token을 httpOnly Cookie로 제공하여 자동 인증하는 경우 아래의 로직은 수정
-        // const token = localStorage.getItem('token');
-        // const tokenExpiry = localStorage.getItem('TokenExpiry');
-
-        // console.log("현재 token", token);
-        // console.log("현재 tokenExpiry", tokenExpiry);
-
-        // if (!token || !tokenExpiry || Number(tokenExpiry) < Date.now()) {
-        //     console.log("Access Token 만료됨, 로그인 필요");
-        //     localStorage.removeItem('token');
-        //     localStorage.removeItem('TokenExpiry');
-            
-        //     // 현재 페이지가 /login이 아닌 경우에만 이동
-        //     if (window.location.pathname !== "/login") {
-        //         navigate('/login');
-        //     }
-        // } else {
-        //     console.log("자동 로그인 성공: 토큰 유효");
-        //     // navigate('/welcome');
-        // }
-    }, [navigate]);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false)
 
     const handleChangeEmail = (e) => setEmail(e.target.value.trim());
     const handleChangePassword = (e) => setPassword(e.target.value.trim());
 
     const handleLogin = async () => {
+        
         if(error) setError(null);
 
         if (!email.trim() || !password.trim()) {
@@ -64,19 +31,10 @@ const useLogin = () => {
         setLoading(true);
 
         try{
-            await authApi.login({ email, password }); // 쿠키 자동 저장
-            navigate('/welcome');
-
-            // const response = await authApi.login({ email, password });
-
-            // localStorage.setItem("token", response.data.Token);
-            // localStorage.setItem("TokenExpiry", Date.now() + 24 * 60 * 60 * 1000); // 만료 시간
-            // // localStorage.setItem("user", JSON.stringify(response.data.user));
-
+            await login(email, password);
             navigate('/welcome');
         } catch(error) {
             setError("아이디나 비밀번호를 다시 확인해주세요.");
-            // setLoading(false);
         } finally {
             setLoading(false);
         }
@@ -98,8 +56,7 @@ const useLogin = () => {
     }
 
     const handleLogout = () => {
-        ['token', 'user', 'TokenExpiry'].map(localStorage.removeItem);
-        navigate('/login');
+        logout();
     }
 
     return {

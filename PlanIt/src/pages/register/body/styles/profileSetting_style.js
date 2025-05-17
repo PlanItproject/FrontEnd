@@ -7,28 +7,28 @@ const Container = styled.div`
     
 `;
 
-const FormHeader = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 40px;
-`
+// const FormHeader = styled.div`
+//     display: flex;
+//     align-items: center;
+//     gap: 40px;
+// `
 
-const Header = styled.div`
-    display: flex;
-    align-items: center;
-`;
+// const Header = styled.div`
+//     display: flex;
+//     align-items: center;
+// `;
 
-const BackButton = styled.button`
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #EFF6FF;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-`;
+// const BackButton = styled.button`
+//     width: 48px;
+//     height: 48px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     background-color: #EFF6FF;
+//     border: none;
+//     border-radius: 50%;
+//     cursor: pointer;
+// `;
 
 const Title = styled.h1`
     font-size: 32px;
@@ -42,6 +42,14 @@ const ProfileContainer = styled.div`
     margin: 20px 0;
     background: var(--color-background-default-secondary);
     border-radius: 20px;
+    position: relative;
+
+    & > span {
+        position: absolute;
+        font-size: 12px;
+        bottom: 24px;
+        color: var(--color-text-default-tertiary);
+    }
 `;
 
 const ProfileWrapper = styled.div`
@@ -173,13 +181,13 @@ const radioStyles = {
 
 export {
     Container,
-    FormHeader,
+    // FormHeader,
     ProfileContainer,
     ProfileWrapper,
-    Header,
+    // Header,
     ProfileImage,
-    BackButton,
-    Title,
+    // BackButton,
+    // Title,
     Label,
     AddButton,
     Input,
