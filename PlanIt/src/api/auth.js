@@ -8,7 +8,12 @@ export const authApi = {
     registerGoogle: (data) => 
         api.post('/public/users/register/google', data),
     verifyEmail: (data) => 
-        api.post('/public/users/register/email/verify', data),
+        api.post('/public/users/register/email/verify', {}, {
+            params: {
+                email: data.email,
+                verificationCode: parseInt(data.verificationCode, 10)
+            }
+        }),
     sendEmailCode : (email) => 
         api.post('/public/users/email/send', {}, {
             params: {email},
@@ -17,9 +22,7 @@ export const authApi = {
         api.post('/public/users/register/email/resend', {}, {
             params: {email},
         }),
-    completeRegister: (data) =>
-        api.post('/public/users/register/final', data),
-    // 자동 로그인 체크용 : 서버가 accessToken 쿠키 보고 유지 정보를 준다.
+    // 자동 로그인 체크용 : 서버가 accessToke,n 쿠키 보고 유지 정보를 준다.
     me: () => 
         api.get('/v1/users/profile/read'),
     logout: () =>

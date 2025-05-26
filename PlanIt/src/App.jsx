@@ -10,28 +10,32 @@ import { store } from "./store/store.js"
 import './styles/App.css';
 import './global.css';
 
+import SplashPage from "./pages/splash/SplashPage.jsx";
 import Community from "./pages/community/Community.jsx";
 import PostDetail from "./pages/community/Post/PostDetail.jsx";
 import AuthRoutes from "./routes/AuthRoutes.jsx";
 import Register from "./pages/register/Regitser.jsx";
 import InquiryRoutes from "./routes/InquiryRoutes.jsx";
-import SplashPage from "./pages/splash/SplashPage.jsx";
-
-// document.cookie = "language=KOREAN; path=/; domain=54.252.52.26";
+import { AuthProvider } from "./contexts/authContext.jsx";
+import WelcomeScreen from "./pages/register/WelcomeScreen.jsx";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Routes>
-          <Route path="/splash" element={<SplashPage />}/>
-          <Route path="/community/post/:postId" element={<PostDetail />} />
-          <Route path="/community/*" element={<Community />} />
+        <AuthProvider>
+          <Routes>
+            <Route path="/splash" element={<SplashPage />} />
+            <Route path="/*" element={<AuthRoutes />} />
+            <Route path="welcome" element={<WelcomeScreen/>} />
+            <Route path="/register/*" element={<Register />}/>
+            <Route path="/inquiry/*" element={<InquiryRoutes />} />
 
-          <Route path="/*" element={<AuthRoutes />} />
-          <Route path="/register/*" element={<Register />} />
-          <Route path="/inquiry/*" element={<InquiryRoutes />} />
-        </Routes>
+            <Route path="/" element={<Navigate to="/community/post" />} />
+            <Route path="/community/*" element={<Community />} />
+            <Route path="/community/post/:postId" element={<PostDetail />} />
+          </Routes>
+        </AuthProvider>
       </Router>
     </Provider>
   );

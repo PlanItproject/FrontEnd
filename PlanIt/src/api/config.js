@@ -24,11 +24,11 @@ const createAxiosInstance = () => {
     instance.interceptors.request.use(
         (config) => {
             // 토큰이 필요하다면 여기서 추가하기
-            const token = localStorage.getItem('token');
-            if (token) {
-                config.headers.Authorization = `Bearer ${token}`;
-            }
-            return config;
+            // const token = localStorage.getItem('token');
+            // if (token) {
+            //     config.headers.Authorization = `Bearer ${token}`;
+            // }
+            // return config;
         },
         (error) => {
             return Promise.reject(error);
@@ -45,10 +45,10 @@ const createAxiosInstance = () => {
         (error) => {
             const errorResponse = error.response?.data;
 
-            if (error.response?.status === 401) {
-                localStorage.removeItem('token');
-                // 여기에 로그인 페이지로 리다이렉트 등을 처리
-            }
+            // if (error.response?.status === 401) {
+            //     localStorage.removeItem('token');
+            //     // 여기에 로그인 페이지로 리다이렉트 등을 처리
+            // }
 
             // return Promise.reject(errorResponse);
             return Promise.reject(error);

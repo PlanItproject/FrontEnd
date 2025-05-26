@@ -1,10 +1,12 @@
 import Earth from "../../assets/Earth.png";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import Splash from "./splash/Splash.jsx";
 import LoginModal from "./loginmodal/LoginModal.jsx";
 import { setLanguage } from "../../api/common.js";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext.jsx";
 
 const squish = keyframes`
     0% { transform: scale(1, 1); }
@@ -34,7 +36,7 @@ const Image = styled.img`
 const Title = styled.h1`
     font-family: "Alfa Slab One", serif;
     font-size: 48px;
-    font-weight: bold;
+    font-weight: 400;
     margin-bottom: 10px;
 `;
 
@@ -55,16 +57,28 @@ const ModalOverlay = styled.div`
 `;
 
 const SplashPage = () => {
+    const { authChecked, isAuthenticated } = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem("lang") || "ko");
     const [isLoginMode, setIsLoginMode] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setShowModal(true);
+            if(authChecked) {
+                if (isAuthenticated) {
+                    navigate("/community/post"); // 메인 만들고 변경
+                } else {
+                    setShowModal(true);
+                }
+            }
         }, 3000);
         return () => clearTimeout(timer);
-    }, []);
+    }, [authChecked, isAuthenticated, navigate]);
+
+    const handleLoginMode = () => {
+        setIsLoginMode(true);
+    }
 
     const handleLanguageSelect = async (lang) => {
         setSelectedLanguage(lang);
@@ -90,7 +104,7 @@ const SplashPage = () => {
                         <Splash
                             selectedLanguage={selectedLanguage}
                             onLanguageSelect={handleLanguageSelect}
-                            onStart={() => setIsLoginMode(true)}
+                            onStart={handleLoginMode}
                         />
                     )}
                 </ModalOverlay>

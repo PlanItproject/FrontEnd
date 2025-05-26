@@ -16,38 +16,41 @@ const Splash = ({ selectedLanguage, onLanguageSelect, onStart }) => {
 
 
     return (
-        <splash.ModalContent>
-            <splash.ModalTitle>선호하는 언어가 있으신가요?</splash.ModalTitle>
-            <splash.ModalSubTitle>Choose your preferred language</splash.ModalSubTitle>
+        <splash.SplashModalContainer>
+            <splash.ModalContent>
+                <splash.ModalTitle>선호하는 언어가 있으신가요?</splash.ModalTitle>
+                <splash.ModalSubTitle>Choose your preferred language</splash.ModalSubTitle>
 
-            {languages.map((language) => (
-                <splash.LanguageOption
-                    key={language.code}
-                    onClick={() => onLanguageSelect(language.code)}
-                    selected={selectedLanguage === language.code}
-                >
-                    <splash.FlagOption>
-                        <splash.Flag>
-                            <img style={{width: "40px", height: "40px"}}
-                                 src={language.flag} alt={language.code} />
-                        </splash.Flag>
-                        {language.name}
-                    </splash.FlagOption>
-                    <splash.RadioButton selected={selectedLanguage === language.code} />
-                </splash.LanguageOption>
-            ))}
+                {languages.map((language) => (
+                    <splash.LanguageOption
+                        key={language.code}
+                        onClick={() => onLanguageSelect(language.code)}
+                        selected={selectedLanguage === language.code}
+                    >
+                        <splash.FlagOption>
+                            <splash.Flag>
+                                <img style={{width: "40px", height: "40px"}}
+                                    src={language.flag} alt={language.code} />
+                            </splash.Flag>
+                            {language.name}
+                        </splash.FlagOption>
+                        <splash.RadioButton selected={selectedLanguage === language.code} />
+                    </splash.LanguageOption>
+                ))}
 
-            <Button
-                style={{
-                    marginTop: '80px'
-                }}
-                variant="primary"
-                size="large"
-                fullWidth
-                onClick={onStart}>
-                시작하기
-            </Button>
-        </splash.ModalContent>
+                <Button
+                    style={{
+                        marginTop: '80px'
+                    }}
+                    variant="primary"
+                    size="large"
+                    fullWidth
+                    onClick={onStart}>
+                    시작하기
+                </Button>
+            </splash.ModalContent>
+            <splash.Logo>PlanIt</splash.Logo>
+        </splash.SplashModalContainer>
     );
 };
 
