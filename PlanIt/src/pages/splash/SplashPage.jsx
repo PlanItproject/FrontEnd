@@ -1,12 +1,9 @@
 import Earth from "../../assets/Earth.png";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import {useEffect, useState, useRef} from "react";
+import {useEffect, useState} from "react";
 import Splash from "./splash/Splash.jsx";
 import LoginModal from "./loginmodal/LoginModal.jsx";
-import { setLanguage } from "../../api/common.js";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext.jsx";
 
 const squish = keyframes`
     0% { transform: scale(1, 1); }
@@ -36,7 +33,7 @@ const Image = styled.img`
 const Title = styled.h1`
     font-family: "Alfa Slab One", serif;
     font-size: 48px;
-    font-weight: 400;
+    font-weight: bold;
     margin-bottom: 10px;
 `;
 
@@ -57,37 +54,20 @@ const ModalOverlay = styled.div`
 `;
 
 const SplashPage = () => {
-    const { authChecked, isAuthenticated } = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem("lang") || "ko");
     const [isLoginMode, setIsLoginMode] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if(authChecked) {
-                if (isAuthenticated) {
-                    navigate("/community/post"); // 메인 만들고 변경
-                } else {
-                    setShowModal(true);
-                }
-            }
+            setShowModal(true);
         }, 3000);
         return () => clearTimeout(timer);
-    }, [authChecked, isAuthenticated, navigate]);
+    }, []);
 
-    const handleLoginMode = () => {
-        setIsLoginMode(true);
-    }
-
-    const handleLanguageSelect = async (lang) => {
+    const handleLanguageSelect = (lang) => {
         setSelectedLanguage(lang);
-        try {
-            const serverLang = lang === 'ko' ? 'KOREAN' : 'ENGLISH';
-            await setLanguage(serverLang);
-        } catch (error) {
-            console.error("언어 설정 실패: ",error);
-        }
+        localStorage.setItem("lang", lang);
     }
 
     return (
@@ -104,7 +84,7 @@ const SplashPage = () => {
                         <Splash
                             selectedLanguage={selectedLanguage}
                             onLanguageSelect={handleLanguageSelect}
-                            onStart={handleLoginMode}
+                            onStart={() => setIsLoginMode(true)}
                         />
                     )}
                 </ModalOverlay>

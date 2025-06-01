@@ -12,29 +12,29 @@ const FormHeader = styled.div`
     gap: 40px;
 `
 
-// const Header = styled.div`
-//     display: flex;
-//     align-items: center;
-//     margin-bottom: 24px;
-// `;
+const Header = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+`;
 
-// const BackButton = styled.button`
-//     width: 48px;
-//     height: 48px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     background-color: #EFF6FF;
-//     border: none;
-//     border-radius: 50%;
-//     cursor: pointer;
-// `;
+const BackButton = styled.button`
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #EFF6FF;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+`;
 
-// const Title = styled.h1`
-//     font-size: 32px;
-//     font-weight: bold;
-//     margin-bottom: 42px;
-// `;
+const Title = styled.h1`
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 42px;
+`;
 
 const FormGroup = styled.div`
     margin-bottom: 24px;
@@ -53,44 +53,61 @@ const InputWrapper = styled.div`
     gap: 8px;
 `;
 
-const VerifyButton = styled.button`
-    padding: 4px 10px;
-    position: absolute;
-    z-index: 1;
-    top: 39px;
-    right: 24px;
-    background-color: ${(props) => (props.disabled ? '#D9D9D9' : '#DBEBFF')};
-    color: ${(props) => (props.disabled ? '#B3B3B3' : '#006DF5')};
-    border:none;
-    border-radius: 6px;
+const Input = styled.input`
+    flex: 1;
+    padding: 15px;
+    width: 90%;
+    border: 1px solid #E5E7EB;
+    border-radius: 9999px;
     font-size: 14px;
-    line-height: 1.4;
-    cursor:pointer;
+
+    &::placeholder {
+        color: #9CA3AF;
+    }
+`;
+
+const VerifyButton = styled.button`
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    padding: 8px;
+    background-color: #DBEAFE;
+    color: #2563EB;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
 `;
 
 const ResendText = styled.div`
     text-align: center;
     font-size: 14px;
-    padding: 10px;
+    color: #4B5563;
+    margin-bottom: 10px;
 `;
 
 const ResendButton = styled.button`
-    color: var(--color-text-default-default);
-    border-bottom: 1px solid var(--color-text-default-default);
-    margin: 8px;
+    border: none;
+    border-bottom: 1px solid black;
+    background: none;
+    margin-left: 8px;
     cursor: pointer;
+    font-size: 14px;
 `;
 
 export {
     Container,
-    // FormHeader,
-    // Header,
+    FormHeader,
+    Header,
     FormGroup,
     InputWrapper,
+    Input,
     VerifyButton,
     ResendText,
     ResendButton,
     Label,
-    // Title,
-    // BackButton
+    Title,
+    BackButton
 }

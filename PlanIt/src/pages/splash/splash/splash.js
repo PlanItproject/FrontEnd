@@ -1,16 +1,15 @@
 import styled from "@emotion/styled";
 
-const SplashModalContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: var(--color-brand-default);
-`;
-
 const ModalContent = styled.div`
-  background: var(--color-background-default-default);
-  height: 72%;
-  border-radius: 0 0 44px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  width: 100%;
+  height: 55%;
+  border-radius: 0 0 30px 30px;
   padding: 80px 44px 44px 44px;
+  margin: 0 auto;
 `;
 
 const LanguageOption = styled.div`
@@ -21,8 +20,9 @@ const LanguageOption = styled.div`
   padding: 10px 16px;
   margin: 15px auto;
   border-radius: 100px;
-  border: 1px solid ${(props) => (props.selected ? "var(--color-border-default-default)" : "none")};
+  border: 1px solid ${(props) => (props.selected ? "#e0e0e0" : "none")};
   cursor: pointer;
+  color: black;
   font-size: 18px;
 `;
 
@@ -36,6 +36,8 @@ const Flag = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 24px;
+  height: 24px;
   background: #f5f5f5;
   border-radius: 50%;
   font-size: 16px;
@@ -64,29 +66,25 @@ const RadioButton = styled.div`
 `;
 
 const ModalTitle = styled.h2`
+  font-family: "Pretendard", serif;
+  color: black;
+  text-align: center;
   font-size: 20px;
   font-weight: 600;
   line-height: 145%;
 `;
 
 const ModalSubTitle = styled.p`
-  margin-bottom: 28px;
+  font-family: "Pretendard", serif;
+  color: black;
+  text-align: center;
+  margin-bottom: 24px;
   font-size: 18px;
   line-height: 145%;
   letter-spacing: -0.36px;
 `;
 
-const Logo = styled.span`
-  font-family: "Alfa Slab One", serif;
-  font-size: 32px;
-  font-weight: 400;
-  position:fixed;
-  transform: translateX(-50%);
-  bottom: 5%;
-`
-
 export {
-  SplashModalContainer,
   LanguageOption,
   ModalContent,
   ModalTitle,
@@ -94,5 +92,4 @@ export {
   FlagOption,
   Flag,
   RadioButton,
-  Logo,
 };

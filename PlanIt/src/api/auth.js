@@ -2,31 +2,10 @@ import { api } from './config.js';
 
 export const authApi = {
     login: (data) =>
-        api.post('/public/users/login', data),
-    registerApp: (data) => 
-        api.post('/public/users/register/app', data),
-    registerGoogle: (data) => 
-        api.post('/public/users/register/google', data),
-    verifyEmail: (data) => 
-        api.post('/public/users/register/email/verify', {}, {
-            params: {
-                email: data.email,
-                verificationCode: parseInt(data.verificationCode, 10)
-            }
-        }),
-    sendEmailCode : (email) => 
-        api.post('/public/users/email/send', {}, {
-            params: {email},
-        }),
-    resendEmailCode: (email) => 
-        api.post('/public/users/register/email/resend', {}, {
-            params: {email},
-        }),
-    // 자동 로그인 체크용 : 서버가 accessToke,n 쿠키 보고 유지 정보를 준다.
-    me: () => 
-        api.get('/v1/users/profile/read'),
+        api.post('/login', data),
     logout: () =>
         api.post('/logout'),
+    // 추가 로직
 }
 
 
