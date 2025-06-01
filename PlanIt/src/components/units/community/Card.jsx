@@ -85,7 +85,6 @@ const Title = styled.span`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-
 `;
 
 const Description = styled.span`
@@ -97,13 +96,11 @@ const Description = styled.span`
   align-self: stretch;
   color: #808080;
 
-  // 줄 수 지정 스타일 추가! 훨씬 간단한거 있으면 지울게요!
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-
 `;
 
 const Image = styled.img`
