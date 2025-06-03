@@ -14,8 +14,8 @@ const Login = () => {
 
   // 로그인 되어 있으면 리다이렉트
   if (isAuthenticated) {
-    return <Navigate to="/community/post" replace /> // 메인만들면 변경
-  };
+    return <Navigate to="/community/post" replace />; // 메인만들면 변경
+  }
 
   return (
     <>

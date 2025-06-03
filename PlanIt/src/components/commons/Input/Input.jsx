@@ -6,11 +6,11 @@ const Input = ({
     label, 
     id = "", 
     type = 'text', 
-    name,
     value, 
     onChange, 
     placeholder = "", 
-    error,
+    error, 
+    hasError, 
     required=false,
     ...props
 }) => {
@@ -24,11 +24,10 @@ const Input = ({
             <StyledInput
                 id={id}
                 type={type}
-                name={name}
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                $hasError={!!error}
+                $hasError={hasError}
                 required={required}
                 {...props}
             />

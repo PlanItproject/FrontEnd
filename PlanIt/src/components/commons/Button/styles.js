@@ -38,18 +38,9 @@ export const StyledButton = styled.button`
         switch($variant) {
             case 'secondary':
             return `
-            background-color: var(--color-background-default-default);
-            border: 1px solid var(--color-border-default-default);
-            color: var(--color-text-default-default);
-
-            &:focus {
-                background-color: var(--color-background-default-default-tap);
-            }
-
-            &:disabled {
-                border: 1px solid var(--color-border-disabled-default);
-                color: var(--color-text-disabled-default);
-            }
+            background-color: white;
+            border: 1px solid #D9D9D9;
+            color: var(--text-default, #333);
         `;
         case 'outline':
             return `
@@ -65,17 +56,8 @@ export const StyledButton = styled.button`
             `
         default:
             return `
-            background-color: var(--color-background-brand-default);
-            color: var(--color-text-brand-on-brand-default);
-
-            &:focus {
-                background-color: var(--color-background-brand-default-tap);
-            }
-
-            &:disabled {
-                background-color: var(--color-background-disabled-default);
-                color: var(--color-text-disabled-default);
-            }
+            background-color: var(--primary-color, #007bff);
+            color: #F5F9FF;
         `;
     }
 }}
