@@ -5,7 +5,7 @@ import Register_body from "./body/BasicInform.jsx";
 import EmailVerification from "./body/EmailVerification.jsx";
 import ProfileSetting from "./body/ProfileSetting.jsx";
 import Tabs from "../../components/commons/Tabs/Tabs.jsx";
-import { setTab } from "../../store/community/slice/CommunitySlice.jsx"
+import { setTab } from "../../store/community/slice/CommunitySlice.jsx";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -14,11 +14,11 @@ const Register = () => {
   const currentTab = useSelector((state) => state.community.currentTab);
 
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
     termsAgreed: false,
     privacyAgreed: false,
   });
@@ -50,14 +50,36 @@ const Register = () => {
   };
 
   return (
-      <div style={{ padding: '20px' }}>
-        <Tabs currentTab={currentTab} steps={steps} onTabClick={handleTabClick} />
-        <Routes>
-          <Route path="registerBody" element={<Register_body onNext={onNext} formData={formData} setFormData={setFormData}/>} />
-          <Route path="emailVerification" element={<EmailVerification onNext={onNext} registerdEmail={formData.email}/>} />
-          <Route path="profileSetting" element={<ProfileSetting onNext={onNext} registerdEmail={formData.email} />} />
-        </Routes>
-      </div>
+    <div style={{ padding: "20px" }}>
+      <Tabs currentTab={currentTab} steps={steps} onTabClick={handleTabClick} />
+      <Routes>
+        <Route
+          path="registerBody"
+          element={
+            <Register_body
+              onNext={onNext}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          }
+        />
+        <Route
+          path="emailVerification"
+          element={
+            <EmailVerification
+              onNext={onNext}
+              registerdEmail={formData.email}
+            />
+          }
+        />
+        <Route
+          path="profileSetting"
+          element={
+            <ProfileSetting onNext={onNext} registerdEmail={formData.email} />
+          }
+        />
+      </Routes>
+    </div>
   );
 };
 

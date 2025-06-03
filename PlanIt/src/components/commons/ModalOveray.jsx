@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -6,7 +6,7 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(4px); 
+  backdrop-filter: blur(4px);
   z-index: 9;
 `;
 

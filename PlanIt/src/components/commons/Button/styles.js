@@ -1,43 +1,43 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledButton = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    gap: 0.5rem;
-    border: none;
-    
-    ${props => {
-        switch(props.size) {
-            case 'small':
-                return `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  gap: 0.5rem;
+  border: none;
+
+  ${(props) => {
+    switch (props.size) {
+      case "small":
+        return `
             border-radius: 20px;
             padding: 8px 16px;
             font-size: 14px;
         `;
-            case 'large':
-                return `
+      case "large":
+        return `
                 border-radius: 28px;
                 padding: 16px 24px;
                 font-size: 16px;
         `;
-            default:
-                return `
+      default:
+        return `
                 border-radius: 24px;
                 padding: 12px 20px;
                 font-size: 15px;
         `;
     }
-}}
-    
-    ${({ $variant }) => {
-        switch($variant) {
-            case 'secondary':
-            return `
+  }}
+
+  ${({ $variant }) => {
+    switch ($variant) {
+      case "secondary":
+        return `
             background-color: var(--color-background-default-default);
             border: 1px solid var(--color-border-default-default);
             color: var(--color-text-default-default);
@@ -51,20 +51,20 @@ export const StyledButton = styled.button`
                 color: var(--color-text-disabled-default);
             }
         `;
-        case 'outline':
-            return `
+      case "outline":
+        return `
             background-color: transparent;
             border: 2px solid var(--primary-color, #007bff);
             color: var(--primary-color, #007bff);
         `;
-        case 'whiteDark':
-            return `
+      case "whiteDark":
+        return `
             background-color: white;
             border : none;
             color: black;
-            `
-        default:
-            return `
+            `;
+      default:
+        return `
             background-color: var(--color-background-brand-default);
             color: var(--color-text-brand-on-brand-default);
 
@@ -78,7 +78,7 @@ export const StyledButton = styled.button`
             }
         `;
     }
-}}
+  }}
 
     ${({ $fullWidth }) => $fullWidth && `width: 100%;`}
     ${({ $ninetyWidth }) => $ninetyWidth && `width: 90%;`}
@@ -86,7 +86,7 @@ export const StyledButton = styled.button`
 
     
     &:disabled {
-        cursor: not-allowed;
-        opacity: 0.6;
-    }
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 `;

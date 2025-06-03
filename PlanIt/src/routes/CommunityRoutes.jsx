@@ -11,8 +11,8 @@ const CommunityRoutes = () => {
       <Route path="post" element={<Post />} />
       <Route path="travelmate" element={<TravelMate />} />
       <Route path="storage" element={<Storage />} />
-      <Route path="postEditor" element={<PostEditor />}/>
-      <Route path="postPreview" element={<PostPreview />}/>
+      <Route path="postEditor" element={<PostEditor />} />
+      <Route path="postPreview" element={<PostPreview />} />
     </Routes>
   );
 };

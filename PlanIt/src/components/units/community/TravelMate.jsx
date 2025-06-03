@@ -4,12 +4,12 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const TravelContainer = styled.div`
   display: flex;
-  width: auto;
-  height: auto;
+  width: 100%;
+  max-width: 188px;
+  min-width: 140px;
+  flex-shrink: 0;
   flex-direction: column;
   border-radius: 16px;
-  background: #f5f5f5;
-  padding: 16px;
   background: var(
     --gradient,
     linear-gradient(
@@ -23,6 +23,7 @@ const TravelContainer = styled.div`
       var(--brand-lightgreen-400, #d2fc02) 100%
     )
   );
+  padding: 16px;
 `;
 
 const TravelHeader = styled.div`
